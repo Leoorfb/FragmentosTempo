@@ -78,7 +78,7 @@ public class TriceratopsBoss : MonoBehaviour
             return;
         }
 
-        if (isStuck)
+        if (isStuck)                                    // Se estiver preso chama o método para lidar com o aprisionamento.
         {
             HandleStuck();
             return;
@@ -88,7 +88,7 @@ public class TriceratopsBoss : MonoBehaviour
 
         if (Time.time >= nextEarthquakeTime && distanceToPlayer <= 7f)
         {
-            Earthquake();                           // Se o jogador perto, e o terremoto está disponível.
+            Earthquake();                           // Se o jogador está perto, e o terremoto está disponível.
         }
 
         if (distanceToPlayer <= tailAttackRange && PlayerIsBehind() && Time.time >= nextTailAttackTime)
@@ -97,29 +97,30 @@ public class TriceratopsBoss : MonoBehaviour
             return;
         }
 
+        if (isPreparingCharge)                          // Preparando para investida.
+        {
+            RotateTowards(player.position);
+            return;
+        }
+
         if (isCharging)
         {
             Charge();                                   // Se está investindo, continua o movimento de investida.
             return;
         }
-
-        else if (isPreparingCharge)
-        {
-            RotateTowards(player.position);
-            return;
-        }
-        if (distanceToPlayer <= chargeRange)
+                
+        if (distanceToPlayer <= chargeRange && Time.time >= nextChargeTime)         // Se o jogador está perto para iniciar a investida.
         {
             PrepareCharge();
+            return;
         }
 
-        else if (distanceToPlayer <= detectionRange)
+        if (distanceToPlayer <= detectionRange)
         {
             ChasePlayer();                          // Se está perto o suficiente, persegue o jogador.
         }
 
-
-        if (distanceToPlayer <= detectionRange && !isCharging)
+        if (distanceToPlayer <= detectionRange && !isCharging)          // Se o jogador está perto e não estiver usando investida, olhar em direção ao jogador.
         {
             RotateTowards(player.position);
         }
@@ -331,31 +332,41 @@ public class TriceratopsBoss : MonoBehaviour
 
         if (isCharging)                                     // Se está investindo.
         {
-            if (collision.gameObject.CompareTag("Tree"))
+            if (collision.gameObject.CompareTag("Tree"))            // Se colidir com árvore enquanto investe, fica preso.
             {
-                GetStuck();                                                                         // Se colidir com árvore enquanto investe, fica preso.
-            }
-            else if (collision.gameObject.CompareTag("Player"))     // Se colidiu com o jogador.
-            {
-                if (!hasChargedDamage)                              // Se ainda não causou dano da investida.
+                if (isCharging)                                     // Garantir que só fique preso se colidir enquanto usa a investida.
                 {
-                    hasChargedDamage = true;                        // Marca que já causou dano.
+                    GetStuck();
 
-                    Rigidbody playerRB = collision.gameObject.GetComponent<Rigidbody>();                // Se colidir com jogador enquanto investe, empurra o jogador
-                    if (playerRB != null)
+                    TreeFall tree = collision.gameObject.GetComponent<TreeFall>();
+                    if (tree != null)
                     {
-                        Vector3 pushDirection = (collision.transform.position - transform.position).normalized;
-                        playerRB.AddForce(pushDirection * pushForce + Vector3.up * pushUpForce);
-                        Debug.Log("Player empurrado!");
-
-                        var damageDealer = GetComponent<TriceratopsDamageDealer>();         // Pega o componente de dano do Triceratops.
-                        if (damageDealer != null)
-                        {
-                            damageDealer.DealChargeDamage(collision.gameObject);            // Aplica o dano de investida ao jogador.
-                            Debug.Log("Dano da investida aplicado!");
-                        }
+                        tree.ForceFall(gameObject);   // Chamamos a função para derrubar a árvore imediatamente
                     }
                 }                
+            }
+        }
+
+        if (collision.gameObject.CompareTag("Player"))     // Se colidiu com o jogador.
+        {
+            if (!hasChargedDamage)                              // Se ainda não causou dano da investida.
+            {
+                hasChargedDamage = true;                        // Marca que já causou dano.
+
+                Rigidbody playerRB = collision.gameObject.GetComponent<Rigidbody>();                // Se colidir com jogador enquanto investe, empurra o jogador
+                if (playerRB != null)
+                {
+                    Vector3 pushDirection = (collision.transform.position - transform.position).normalized;
+                    playerRB.AddForce(pushDirection * pushForce + Vector3.up * pushUpForce);
+                    Debug.Log("Player empurrado!");
+
+                    var damageDealer = GetComponent<TriceratopsDamageDealer>();         // Pega o componente de dano do Triceratops.
+                    if (damageDealer != null)
+                    {
+                        damageDealer.DealChargeDamage(collision.gameObject);            // Aplica o dano de investida ao jogador.
+                        Debug.Log("Dano da investida aplicado!");
+                    }
+                }
             }
         }
     }

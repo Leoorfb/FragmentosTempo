@@ -20,8 +20,9 @@ public class MainMenu : MonoBehaviour
 
     public void Play()
     {
-        SceneManager.LoadScene("Game");
+        SceneManager.LoadScene("BossTrice");
         MusicManager.Instance.PlayMusic("Game");
+        
     }
 
     public void Quit()

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1795393559782908320}
   m_Layer: 9
   m_Name: Head
-  m_TagString: Untagged
+  m_TagString: Trice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -121,7 +121,7 @@ GameObject:
   - component: {fileID: 2075731982587209316}
   m_Layer: 9
   m_Name: Visuals
-  m_TagString: Untagged
+  m_TagString: Trice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -225,11 +225,13 @@ GameObject:
   m_Component:
   - component: {fileID: 357211469217427026}
   - component: {fileID: 1344072726193254959}
+  - component: {fileID: 4310893513602013835}
   - component: {fileID: 6475270194212578936}
   - component: {fileID: 6088920814773879947}
+  - component: {fileID: 5046464068805904808}
   m_Layer: 9
   m_Name: Trice
-  m_TagString: Untagged
+  m_TagString: Trice
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -277,6 +279,27 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &4310893513602013835
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8036149312599791903}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 3.082527, z: 1.4169683}
+  m_Center: {x: 0, y: 1.5724231, z: 0.20848417}
 --- !u!114 &6475270194212578936
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -291,12 +314,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   chaseSpeed: 5
-  detectionRange: 9.5
+  detectionRange: 15
   chargeSpeed: 20
   chargeRange: 10
   maxChargeDistance: 10.5
   chargePrepareTime: 1.5
-  chargeCooldown: 6
+  chargeCooldown: 8
   stuckTime: 3
   pushForce: 700
   pushUpForce: 150
@@ -328,3 +351,18 @@ MonoBehaviour:
   chargeDamage: 10
   tailDamage: 15
   earthquakeDamage: 20
+--- !u!114 &5046464068805904808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8036149312599791903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5167dda8e2dc040b0553f0ca1d7614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  healthBarUI: {fileID: 2777386748628242890, guid: 48dde5fc4bb296f4d8c92880b0c27f22,
+    type: 3}
