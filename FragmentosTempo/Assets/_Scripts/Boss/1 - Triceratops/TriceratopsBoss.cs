@@ -95,13 +95,7 @@ public class TriceratopsBoss : MonoBehaviour
         {
             TailAttack();                           // Se o jogador está atrás, dentro do alcance e o ataque de cauda está liberado.
             return;
-        }
-
-        if (isPreparingCharge)                          // Preparando para investida.
-        {
-            RotateTowards(player.position);
-            return;
-        }
+        }        
 
         if (isCharging)
         {
