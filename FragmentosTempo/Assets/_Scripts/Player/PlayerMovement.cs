@@ -19,6 +19,7 @@ public class PlayerMovement : MonoBehaviour
     private InputAction moveInput;
     private InputAction dashInput;
     private Rigidbody rb;
+    [SerializeField] private Animator animator;
     
     public PlayerInputAction playerInputAction; // mover para uma classe Player quando criada
 
@@ -52,6 +53,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        SetAnimation();
         if (!isDashing)
         {
             moveDirection.x = moveInput.ReadValue<Vector2>().x;
@@ -89,5 +91,22 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(dashDuration);
         isDashing = false;
         moveSpeed = walkSpeed;
+    }
+
+    private void SetAnimation()
+    {
+        if (moveDirection == Vector3.zero)
+        {
+            animator.SetBool("isWalking", false);
+            return;
+        }
+
+        animator.SetBool("isWalking", true);
+
+        float dotX = Vector3.Dot(transform.forward, moveDirection);
+        float dotZ = Vector3.Dot(transform.right, moveDirection);
+
+        animator.SetFloat("speedX", dotX);
+        animator.SetFloat("speedZ", dotZ);
     }
 }

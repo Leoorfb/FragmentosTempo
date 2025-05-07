@@ -6,14 +6,10 @@ public class PlayerAim : MonoBehaviour
 {
     [SerializeField] private LayerMask groundLayerMask;
 
-    private Camera mainCamera;
+    [SerializeField] private Camera aimCamera;
 
     public Vector3 aimingTargetPoint;
 
-    private void Start()
-    {
-        mainCamera = Camera.main;
-    }
 
     private void Update()
     {
@@ -22,7 +18,7 @@ public class PlayerAim : MonoBehaviour
 
     private (bool success, Vector3 position) GetMousePosition()
     {
-        var ray = mainCamera.ScreenPointToRay(Input.mousePosition);
+        var ray = aimCamera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundLayerMask))
         {
