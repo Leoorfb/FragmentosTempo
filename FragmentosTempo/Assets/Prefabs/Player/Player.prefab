@@ -295,6 +295,11 @@ MonoBehaviour:
   dashSpeed: 12
   dashCooldownTime: 1.5
   dashDuration: 0.2
+  dashCDOverlay: {fileID: 0}
+  attackCooldownTime: 1
+  attackCDOverlay: {fileID: 0}
+  lifePotionCooldownTime: 5
+  lifePotionCDOverlay: {fileID: 0}
 --- !u!114 &6062106733876610680
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -325,6 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   currentHealth: 0
+  healthBarImage: {fileID: 0}
 --- !u!65 &4160257733155155668
 BoxCollider:
   m_ObjectHideFlags: 0
