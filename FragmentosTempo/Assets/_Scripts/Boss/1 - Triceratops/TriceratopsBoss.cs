@@ -3,8 +3,28 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class TriceratopsBoss : MonoBehaviour
+public class TriceratopsBoss : MonoBehaviour, IBoss
 {
+    private bool canMove = true;                    // Variável privada para controlar se Boss pode se mover.
+
+    public void SetCanMove(bool value)                  // Método que permite definir se o Trice pode se mover ou não.
+    {
+        canMove = value;                            // Atualiza a variável de controle de movimento com o valor recebido
+        Debug.Log("Trice can move: " + canMove);
+
+        if (!canMove)                               // Cancela ações atuais.
+        {
+            rb.velocity = Vector3.zero;
+            isCharging = false;
+            isPreparingCharge = false;
+            isTailAttacking = false;
+            isEarthquaking = false;
+            earthquakeImpactDone = false;
+
+            StopAllCoroutines();                    // Interrompe todas as corrotinas em andamento.
+        }
+    }
+
     [Header("Player Target")]
     public Transform player;                            // Referência ao Transform do jogador.
 
@@ -61,7 +81,7 @@ public class TriceratopsBoss : MonoBehaviour
     private bool earthquakeImpactDone = false;          // Verifica se o impacto já aconteceu.
     private bool isOnGround = true;                     // Verifica se está no chão.
 
-    void Start()
+    void Awake()
     {
         rb = GetComponent<Rigidbody>();                 // Pega o Rigidbody no início do jogo.
     }
@@ -70,6 +90,12 @@ public class TriceratopsBoss : MonoBehaviour
     {
         if (player == null)                             // Se não tem jogador, não faz nada.
         {
+            return;
+        }
+
+        if (!canMove)                                   // Verifica se o movimento está desabilitado.
+        {
+            rb.velocity = Vector3.zero;
             return;
         }
 
@@ -143,17 +169,17 @@ public class TriceratopsBoss : MonoBehaviour
 
     void PrepareCharge()                                    // Método para iniciar o carregamento da investida.
     {
-        if (isPreparingCharge || Time.time < nextChargeTime) return;
+        if (isPreparingCharge || Time.time < nextChargeTime) return;            // Se já está preparando a investida ou ainda não passou o tempo de recarga, sai do método.
 
-        isPreparingCharge = true;
-        rb.velocity = Vector3.zero;
+        isPreparingCharge = true;                                               // Define que o Trice agora está no estado de preparação da investida
+        rb.velocity = Vector3.zero;                                             // Para o movimento atual, zerando a velocidade
 
-        chargeTarget = player.position;
-        chargeDirection = (chargeTarget - transform.position).normalized;
+        chargeTarget = player.position;                                         // Guarda a posição atual do jogador como alvo da investida.
+        chargeDirection = (chargeTarget - transform.position).normalized;       // Calcula a direção da investida, do inimigo até o jogador.
 
         Debug.Log("Preparando investida...");
 
-        Invoke(nameof(StartCharge), chargePrepareTime);
+        Invoke(nameof(StartCharge), chargePrepareTime);                         // Agenda a chamada do método StartCharge após um tempo de preparação
     }
 
     void StartCharge()                                      // Método para iniciar a investida.
@@ -187,7 +213,7 @@ public class TriceratopsBoss : MonoBehaviour
     void EndCharge()                                        // Método para finalizar a investida.
     {
         isCharging = false;
-        hasChargedDamage = false;                               // Reseta para permitir dano na próxima investida.
+        hasChargedDamage = false;                           // Reseta para permitir dano na próxima investida.
         Debug.Log("Trice terminou a investida");
         RotateTowards(player.position);
     }
