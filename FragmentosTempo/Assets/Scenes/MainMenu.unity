@@ -328,7 +328,7 @@ MonoBehaviour:
     mipBias: 0
     varianceClampScale: 0.9
     contrastAdaptiveSharpening: 0
---- !u!1001 &1749633476
+--- !u!1001 &1850624905
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -339,17 +339,17 @@ PrefabInstance:
     - target: {fileID: 4871990914228853561, guid: 4ce50d3ddcb91604da70c1eecb3cc472,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 735.4322
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4871990914228853561, guid: 4ce50d3ddcb91604da70c1eecb3cc472,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 610.58496
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4871990914228853561, guid: 4ce50d3ddcb91604da70c1eecb3cc472,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -396.13916
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4871990914228853561, guid: 4ce50d3ddcb91604da70c1eecb3cc472,
         type: 3}
@@ -714,4 +714,4 @@ SceneRoots:
   - {fileID: 3687681928082138834}
   - {fileID: 600504211}
   - {fileID: 3066355817412451795}
-  - {fileID: 1749633476}
+  - {fileID: 1850624905}

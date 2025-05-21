@@ -364,5 +364,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 100
-  healthBarUI: {fileID: 2777386748628242890, guid: 48dde5fc4bb296f4d8c92880b0c27f22,
-    type: 3}

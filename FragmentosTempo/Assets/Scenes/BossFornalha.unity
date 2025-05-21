@@ -181,7 +181,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce5bd4575da36084b8fc6e8652bd7ba4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
+  walkSpeed: 5
+  canMove: 1
+  dashSpeed: 12
+  dashCooldownTime: 1.5
+  dashDuration: 0.2
+  dashCDOverlay: {fileID: 0}
+  attackCooldownTime: 1
+  attackCDOverlay: {fileID: 0}
+  lifePotionCooldownTime: 5
+  lifePotionCDOverlay: {fileID: 0}
 --- !u!4 &154883665
 Transform:
   m_ObjectHideFlags: 0
@@ -213,6 +222,7 @@ MonoBehaviour:
   groundLayerMask:
     serializedVersion: 2
     m_Bits: 64
+  dialogBox: {fileID: 0}
   aimingTargetPoint: {x: 0, y: 0, z: 0}
 --- !u!1 &427330754
 GameObject:
