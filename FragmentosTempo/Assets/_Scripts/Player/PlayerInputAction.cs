@@ -62,6 +62,24 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Ultimate"",
+                    ""type"": ""Button"",
+                    ""id"": ""cd106c13-5761-4849-b6f8-36e522e14ed0"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Heal"",
+                    ""type"": ""Button"",
+                    ""id"": ""6a1934aa-4170-4ac0-bbe2-d6843a67ffe4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -183,6 +201,28 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Keyboard + Mouse"",
                     ""action"": ""SecondaryAttack"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a59755b2-5df9-471e-9ed3-85846da3c159"",
+                    ""path"": ""<Keyboard>/v"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Ultimate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6e893b4e-33e8-4d90-8f1f-9c4804ae8b65"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Heal"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -730,6 +770,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
         m_Player_Attack = m_Player.FindAction("Attack", throwIfNotFound: true);
         m_Player_SecondaryAttack = m_Player.FindAction("SecondaryAttack", throwIfNotFound: true);
+        m_Player_Ultimate = m_Player.FindAction("Ultimate", throwIfNotFound: true);
+        m_Player_Heal = m_Player.FindAction("Heal", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -807,6 +849,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Dash;
     private readonly InputAction m_Player_Attack;
     private readonly InputAction m_Player_SecondaryAttack;
+    private readonly InputAction m_Player_Ultimate;
+    private readonly InputAction m_Player_Heal;
     public struct PlayerActions
     {
         private @PlayerInputAction m_Wrapper;
@@ -815,6 +859,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputAction @Attack => m_Wrapper.m_Player_Attack;
         public InputAction @SecondaryAttack => m_Wrapper.m_Player_SecondaryAttack;
+        public InputAction @Ultimate => m_Wrapper.m_Player_Ultimate;
+        public InputAction @Heal => m_Wrapper.m_Player_Heal;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -836,6 +882,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @SecondaryAttack.started += instance.OnSecondaryAttack;
             @SecondaryAttack.performed += instance.OnSecondaryAttack;
             @SecondaryAttack.canceled += instance.OnSecondaryAttack;
+            @Ultimate.started += instance.OnUltimate;
+            @Ultimate.performed += instance.OnUltimate;
+            @Ultimate.canceled += instance.OnUltimate;
+            @Heal.started += instance.OnHeal;
+            @Heal.performed += instance.OnHeal;
+            @Heal.canceled += instance.OnHeal;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -852,6 +904,12 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
             @SecondaryAttack.started -= instance.OnSecondaryAttack;
             @SecondaryAttack.performed -= instance.OnSecondaryAttack;
             @SecondaryAttack.canceled -= instance.OnSecondaryAttack;
+            @Ultimate.started -= instance.OnUltimate;
+            @Ultimate.performed -= instance.OnUltimate;
+            @Ultimate.canceled -= instance.OnUltimate;
+            @Heal.started -= instance.OnHeal;
+            @Heal.performed -= instance.OnHeal;
+            @Heal.canceled -= instance.OnHeal;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1002,6 +1060,8 @@ public partial class @PlayerInputAction: IInputActionCollection2, IDisposable
         void OnDash(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnSecondaryAttack(InputAction.CallbackContext context);
+        void OnUltimate(InputAction.CallbackContext context);
+        void OnHeal(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
