@@ -7,13 +7,13 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] private LayerMask groundLayerMask;                     // Máscara de camada para detectar colisões com o solo.
     [SerializeField] private GameObject dialogBox;                          // Referência à caixa de diálogo, usada para travar a rotação durante o diálogo.
 
-    private Camera mainCamera;                                              // Referência à câmera principal, usada para calcular a posição do mouse no mundo.
+    [SerializeField] private Camera aimCamera;                                              // Referência à câmera principal, usada para calcular a posição do mouse no mundo.
 
     public Vector3 aimingTargetPoint;                                       // Ponto de destino para onde o jogador está mirando.
 
     private void Start()
     {
-        mainCamera = Camera.main;                                           // Inicializa a referência da câmera principal.
+        //mainCamera = Camera.main;                                           // Inicializa a referência da câmera principal.
     }
 
     private void Update()
@@ -23,7 +23,7 @@ public class PlayerAim : MonoBehaviour
 
     private (bool success, Vector3 position) GetMousePosition()             // Método para obter a posição do mouse no mundo, verificando a colisão com o solo.
     {
-        var ray = mainCamera.ScreenPointToRay(Input.mousePosition);         // Cria um raio a partir da posição do mouse na tela.
+        var ray = aimCamera.ScreenPointToRay(Input.mousePosition);         // Cria um raio a partir da posição do mouse na tela.
 
         if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundLayerMask))     // Verifica se o raio colide com algo no solo, usando o LayerMask para limitar as colisões ao solo.
         {
