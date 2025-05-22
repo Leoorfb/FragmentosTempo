@@ -25,6 +25,7 @@ public class DialogManager : MonoBehaviour
     private bool isTyping = false;                                  // Flag que verifica se o texto está sendo digitado.
     private Coroutine typingCoroutine;                              // Referência para a corrotina que controla a digitação do texto.
 
+    public bool IsDialogActive => dialogBox.activeSelf;             // Propriedade pública que retorna true se a caixa de diálogo estiver ativa na cena.
 
     // Start is called before the first frame update
     void Start()

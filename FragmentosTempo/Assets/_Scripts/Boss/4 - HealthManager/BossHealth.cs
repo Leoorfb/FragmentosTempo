@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class BossHealth : MonoBehaviour
 {
     public int maxHealth = 100;                                         // Quantidade máxima de vida.
-    private int currentHealth;                                          // Vida atual do Boss.
+    public int currentHealth;                                           // Vida atual do Boss.
     private BossHealthBarUI healthBarUI;                                // Referência para o script que controla a UI da barra de vida.
     private string bossName;                                            // Nome do Boss atual.
 
@@ -56,6 +56,7 @@ public class BossHealth : MonoBehaviour
     public void ApplyDamage(int amount)                                 // Aplica dano ao boss e verifica se ele deve morrer.
     {
         currentHealth -= amount;                                        // Reduz a vida.
+        DamagePopUpGenerator.current.CreatePopUp(transform.position, amount.ToString(), Color.red);         // Exibe na tela o dano sofrido.
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);       // Garante que a vida fique entre 0 e o máximo.
         UpdateLifeBar();                                                // Atualiza a UI
 

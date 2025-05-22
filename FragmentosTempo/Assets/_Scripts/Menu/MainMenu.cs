@@ -35,7 +35,7 @@ public class MainMenu : MonoBehaviour
     {
         audioMixer.SetFloat("MusicVolume", volume);                             // Atualiza o volume da música no AudioMixer.
     }
-    
+
     public void UpdateEffectsVolume(float volume)                               // Método para atualizar o volume dos efeitos sonoros com base no valor do slider.
     {
         audioMixer.SetFloat("SFXVolume", volume);                               // Atualiza o volume dos efeitos sonoros no AudioMixer.

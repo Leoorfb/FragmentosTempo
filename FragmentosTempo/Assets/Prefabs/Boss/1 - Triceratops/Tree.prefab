@@ -105,7 +105,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.68
+  m_Radius: 0.6
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0.000000059604645, y: 0, z: -0.00000008940697}
@@ -117,7 +117,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3645695001637207190}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 2
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -152,3 +152,6 @@ MonoBehaviour:
   fallDelay: 0.5
   fallTimer: 0
   destroyDelay: 2.5
+  healthPotionPrefab: {fileID: 8419388196199256599, guid: b8c09ea722234b24c946ebfee225ebd3,
+    type: 3}
+  dropChance: 0.5

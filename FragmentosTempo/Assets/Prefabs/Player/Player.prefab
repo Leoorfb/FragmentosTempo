@@ -94,6 +94,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 302028997176016109}
+  - {fileID: 3291272968281252857}
   m_Father: {fileID: 786584749708160826}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &918378237210035468
@@ -227,10 +228,11 @@ GameObject:
   m_Component:
   - component: {fileID: 786584749708160826}
   - component: {fileID: 5708378559960568458}
+  - component: {fileID: 4160257733155155668}
   - component: {fileID: 812597733632668408}
   - component: {fileID: 6062106733876610680}
   - component: {fileID: 227564338538363808}
-  - component: {fileID: 4160257733155155668}
+  - component: {fileID: 8477867027517376017}
   m_Layer: 8
   m_Name: Player
   m_TagString: Player
@@ -262,7 +264,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1317785343131855425}
   serializedVersion: 4
-  m_Mass: 1
+  m_Mass: 0.5
   m_Drag: 0
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -281,59 +283,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 112
   m_CollisionDetection: 0
---- !u!114 &812597733632668408
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1317785343131855425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce5bd4575da36084b8fc6e8652bd7ba4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  walkSpeed: 5
-  dashSpeed: 12
-  dashCooldownTime: 1.5
-  dashDuration: 0.2
-  animator: {fileID: 5967596135676044951}
-  dashCDOverlay: {fileID: 0}
-  attackCooldownTime: 1
-  attackCDOverlay: {fileID: 0}
-  lifePotionCooldownTime: 5
-  lifePotionCDOverlay: {fileID: 0}
---- !u!114 &6062106733876610680
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1317785343131855425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 37397ccf575df9849834322cc98e23c9, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  groundLayerMask:
-    serializedVersion: 2
-    m_Bits: 64
-  aimingTargetPoint: {x: 0, y: 0, z: 0}
---- !u!114 &227564338538363808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1317785343131855425}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 195670adda1821d409aaae3edc40fd97, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 100
-  currentHealth: 0
-  healthBarImage: {fileID: 0}
 --- !u!65 &4160257733155155668
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -355,6 +304,94 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 2.0868104, z: 0.5004301}
   m_Center: {x: 0, y: 1.0939602, z: -0.043559343}
+--- !u!114 &812597733632668408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317785343131855425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce5bd4575da36084b8fc6e8652bd7ba4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  walkSpeed: 5
+  canMove: 1
+  dashSpeed: 12
+  dashCooldownTime: 1.5
+  dashDuration: 0.2
+  dashCDOverlay: {fileID: 0}
+  playerRenderer: {fileID: 3480535498475128217}
+  dashColor: {r: 0, g: 1, b: 1, a: 1}
+  attackCooldownTime: 2
+  attackCDOverlay: {fileID: 0}
+  SecondAtkCooldownTime: 3
+  SecondAtkCDOverlay: {fileID: 0}
+  ultCooldownTime: 10
+  ultCDOverlay: {fileID: 0}
+  lifePotionCooldownTime: 5
+  lifePotionCDOverlay: {fileID: 0}
+  animator: {fileID: 5967596135676044951}
+--- !u!114 &6062106733876610680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317785343131855425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37397ccf575df9849834322cc98e23c9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  groundLayerMask:
+    serializedVersion: 2
+    m_Bits: 64
+  dialogBox: {fileID: 0}
+  aimingTargetPoint: {x: 0, y: 0, z: 0}
+--- !u!114 &227564338538363808
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317785343131855425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 195670adda1821d409aaae3edc40fd97, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 100
+  currentHealth: 0
+  healthBarImage: {fileID: 0}
+  potionCountText: {fileID: 0}
+  potionCount: 3
+  potionHealAmount: 30
+  isInvunerable: 0
+--- !u!114 &8477867027517376017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1317785343131855425}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abdde7600eb1dda439185ca155f14eb7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laserPrefab: {fileID: 8252552610341244969, guid: 2426309e385198f41840d10af81c2c83,
+    type: 3}
+  leftHandTransform: {fileID: 6451362962922065605}
+  delayShots: 0.1
+  secondaryAtkPrefab: {fileID: 3163330373457254488, guid: a843de076b403df48bf0de186b2cef89,
+    type: 3}
+  rightHandTransform: {fileID: 1877456180354065614}
+  ultimatePrefab: {fileID: 5003188530645726675, guid: 47ff3f641fd2efb40bad097fa2c3cf53,
+    type: 3}
+  ultHandTransform: {fileID: 3291272968281252857}
+  delayUltimate: 1.5
 --- !u!1 &1586062386386089917
 GameObject:
   m_ObjectHideFlags: 0
@@ -544,6 +581,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5935066128229215854}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &3418154148002819679
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3291272968281252857}
+  m_Layer: 8
+  m_Name: UltHands
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3291272968281252857
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3418154148002819679}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.291, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3833711081563088342}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3560900265481976721
 GameObject:

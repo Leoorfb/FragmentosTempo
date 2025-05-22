@@ -228,6 +228,10 @@ MonoBehaviour:
   - '"Use WASD para se mover"'
   - '"Use SHIFT para usar o Dash"'
   - "\"Use o MOUSE para mudar a dire\xE7\xE3o que voc\xEA est\xE1 olhando\""
+  - "\"Use o F para usar Po\xE7\xE3o de Cura\""
+  - "\"Use LMB para ataque b\xE1sico\""
+  - "\"Use RMB para ataque m\xE9dio\""
+  - '"Use o V para usar Ultimate"'
   dialogText: {fileID: 3755629839963510132}
   dialogBox: {fileID: 4252873183691033060}
   nextButton: {fileID: 459560731083952571}

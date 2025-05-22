@@ -4,41 +4,45 @@ using UnityEngine;
 
 public class PlayerAim : MonoBehaviour
 {
-    [SerializeField] private LayerMask groundLayerMask;                     // M�scara de camada para detectar colis�es com o solo.
-    [SerializeField] private GameObject dialogBox;                          // Refer�ncia � caixa de di�logo, usada para travar a rota��o durante o di�logo.
+    [SerializeField] private LayerMask groundLayerMask;                     // Máscara de camada para detectar colisões com o solo.
+    [SerializeField] private GameObject dialogBox;                          // Referência à caixa de diálogo, usada para travar a rotação durante o diálogo.
 
-    [SerializeField] private Camera aimCamera;
+    private Camera mainCamera;                                              // Referência à câmera principal, usada para calcular a posição do mouse no mundo.
 
-    public Vector3 aimingTargetPoint;                                       // Ponto de destino para onde o jogador est� mirando.
+    public Vector3 aimingTargetPoint;                                       // Ponto de destino para onde o jogador está mirando.
 
+    private void Start()
+    {
+        mainCamera = Camera.main;                                           // Inicializa a referência da câmera principal.
+    }
 
     private void Update()
     {
-        Aim();                                                              // Chama o m�todo de mira a cada frame.
+        Aim();                                                              // Chama o método de mira a cada frame.
     }
 
-    private (bool success, Vector3 position) GetMousePosition()             // M�todo para obter a posi��o do mouse no mundo, verificando a colis�o com o solo.
+    private (bool success, Vector3 position) GetMousePosition()             // Método para obter a posição do mouse no mundo, verificando a colisão com o solo.
     {
-        var ray = aimCamera.ScreenPointToRay(Input.mousePosition);         // Cria um raio a partir da posi��o do mouse na tela.
+        var ray = mainCamera.ScreenPointToRay(Input.mousePosition);         // Cria um raio a partir da posição do mouse na tela.
 
-        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundLayerMask))     // Verifica se o raio colide com algo no solo, usando o LayerMask para limitar as colis�es ao solo.
+        if (Physics.Raycast(ray, out var hitInfo, Mathf.Infinity, groundLayerMask))     // Verifica se o raio colide com algo no solo, usando o LayerMask para limitar as colisões ao solo.
         {
-            return (success: true, position: hitInfo.point);                // Se o raio colidir, retorna a posi��o do ponto de impacto.
+            return (success: true, position: hitInfo.point);                // Se o raio colidir, retorna a posição do ponto de impacto.
         }
         else
-            return (success: false, position: Vector3.zero);                // Se n�o colidir, retorna false e a posi��o (0, 0, 0).
+            return (success: false, position: Vector3.zero);                // Se não colidir, retorna false e a posição (0, 0, 0).
     }
 
-    private void Aim()                                                      // M�todo respons�vel pela rota��o do jogador em dire��o ao ponto de mira.
+    private void Aim()                                                      // Método responsável pela rotação do jogador em direção ao ponto de mira.
     {
-        if (dialogBox != null && dialogBox.activeSelf) return;              // Se o di�logo estiver ativo, a rota��o � bloqueada (n�o gira o jogador).
+        if (dialogBox != null && dialogBox.activeSelf) return;              // Se o diálogo estiver ativo, a rotação é bloqueada (não gira o jogador).
 
-        var (success, aimingTargetPoint) = GetMousePosition();              // Obt�m a posi��o do mouse no mundo, usando o m�todo GetMousePosition.
+        var (success, aimingTargetPoint) = GetMousePosition();              // Obtém a posição do mouse no mundo, usando o método GetMousePosition.
         if (success)
         {
-            Vector3 direction = aimingTargetPoint - transform.position;     // Calcula a dire��o do jogador para o ponto de mira, mantendo a rota��o apenas no eixo horizontal (y = 0).
-            direction.y = 0;                                                // Ignora a altura para garantir que a rota��o seja apenas horizontal.
-            transform.forward = direction;                                  // Atualiza a dire��o do jogador para olhar para o ponto de mira.
+            Vector3 direction = aimingTargetPoint - transform.position;     // Calcula a direção do jogador para o ponto de mira, mantendo a rotação apenas no eixo horizontal (y = 0).
+            direction.y = 0;                                                // Ignora a altura para garantir que a rotação seja apenas horizontal.
+            transform.forward = direction;                                  // Atualiza a direção do jogador para olhar para o ponto de mira.
         }
     }
 }

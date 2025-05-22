@@ -288,22 +288,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: LifeBar
       objectReference: {fileID: 0}
-    - target: {fileID: 557965005038586373, guid: 8e3d3181591234949a819cc73df80a99,
-        type: 3}
-      propertyPath: lifeBarImage
-      value: 
-      objectReference: {fileID: 3819218533308229711}
-    - target: {fileID: 1066607479963852554, guid: 8e3d3181591234949a819cc73df80a99,
-        type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 8be59f6678fd70e479d1568b87f839e9,
-        type: 3}
-    - target: {fileID: 1066607479963852554, guid: 8e3d3181591234949a819cc73df80a99,
-        type: 3}
-      propertyPath: m_FillAmount
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 1280880248795505218, guid: 8e3d3181591234949a819cc73df80a99,
         type: 3}
       propertyPath: m_Pivot.x
@@ -343,21 +327,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 41.9092
-      objectReference: {fileID: 0}
-    - target: {fileID: 1280880248795505218, guid: 8e3d3181591234949a819cc73df80a99,
-        type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.78607386
-      objectReference: {fileID: 0}
-    - target: {fileID: 1280880248795505218, guid: 8e3d3181591234949a819cc73df80a99,
-        type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.78607386
-      objectReference: {fileID: 0}
-    - target: {fileID: 1280880248795505218, guid: 8e3d3181591234949a819cc73df80a99,
-        type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.78607386
       objectReference: {fileID: 0}
     - target: {fileID: 1280880248795505218, guid: 8e3d3181591234949a819cc73df80a99,
         type: 3}
@@ -418,11 +387,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7117240621981111348, guid: 8e3d3181591234949a819cc73df80a99,
-        type: 3}
-      propertyPath: m_CullTransparentMesh
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

@@ -121,14 +121,14 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
         {
             TailAttack();                           // Se o jogador está atrás, dentro do alcance e o ataque de cauda está liberado.
             return;
-        }        
+        }
 
         if (isCharging)
         {
             Charge();                                   // Se está investindo, continua o movimento de investida.
             return;
         }
-                
+
         if (distanceToPlayer <= chargeRange && Time.time >= nextChargeTime)         // Se o jogador está perto para iniciar a investida.
         {
             PrepareCharge();
@@ -145,7 +145,7 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
             RotateTowards(player.position);
         }
     }
-    
+
     bool PlayerIsBehind() => Vector3.Angle(transform.forward, (player.position - transform.position).normalized) > 120f;        // Método para verificar se o jogador está na parte de trás.
 
     void RotateTowards(Vector3 target)                      // Método para rotacionar em direção ao jogador.
@@ -308,7 +308,7 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
         isEarthquaking = false;                                                                         // Marca que o terremoto acabou.
         isOnGround = true;                                                                              // Marca que está no chão.
     }
-        
+
     void GetStuck()                                         // Método para aprisonar o Boss.
     {
         Debug.Log("Triceratops esta preso na arvore!");
@@ -363,7 +363,7 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
                     {
                         tree.ForceFall(gameObject);   // Chamamos a função para derrubar a árvore imediatamente
                     }
-                }                
+                }
             }
         }
 

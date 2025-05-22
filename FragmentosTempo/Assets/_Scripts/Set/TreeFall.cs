@@ -12,6 +12,10 @@ public class TreeFall : MonoBehaviour
     [Header("Destroy")]
     [SerializeField] private float destroyDelay = 2.5f;         // tempo de espera antes de destruir.
 
+    [Header("Drop Settings")]
+    [SerializeField] private GameObject healthPotionPrefab;             // Receber o prefab da poção.
+    [SerializeField][Range(0f, 1f)] private float dropChance = 0.5f;    // Porcentagem de chance de dropar poção.
+
     private bool isFalling = false;                             // Controle se a árvore está em queda.
     private bool hasFallen = false;                             // Controle se a árvore já caiu.
     private bool triceTouching = false;                         // Controle se o Triceratops está em contato.
@@ -93,6 +97,20 @@ public class TreeFall : MonoBehaviour
     private IEnumerator DestroyAfterDelay()                     // Coroutine para destruição da árvore.
     {
         yield return new WaitForSeconds(destroyDelay);
+
         Destroy(gameObject);                                    // Destrói a árvore.
+
+        TrySpawnDrop();
+    }
+
+    private void TrySpawnDrop()                                 // Método para tentar usar o spawn de poção com certa porcentagem de chance.
+    {
+        if (healthPotionPrefab == null) return;                 // Verifica se o prefab da poção de vida foi atribuído. Se não, sai do método.
+
+        float roll = Random.Range(0f, 1f);                      // Gera um número aleatório entre 0.0 e 1.0.
+        if (roll <= dropChance)                                 // Se o valor aleatório for menor ou igual à chance de drop, instancia a poção no local atual.
+        {
+            Instantiate(healthPotionPrefab, transform.position, Quaternion.identity);       // Cria a poção na posição do objeto atual.
+        }
     }
 }
