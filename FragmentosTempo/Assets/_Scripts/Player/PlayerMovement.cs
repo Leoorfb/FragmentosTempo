@@ -14,9 +14,6 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float dashCooldownTime = 1.5f;                 // Tempo de recarga do dash.
     [SerializeField] private float dashDuration = .2f;                      // Duração do dash.
     [SerializeField] private Image dashCDOverlay;                           // UI: overlay que mostra recarga do dash.
-    [SerializeField] private Renderer playerRenderer;                       // Referência ao Renderer do jogador.
-    [SerializeField] private Color dashColor = Color.cyan;                  // Cor durante o Dash.
-    private Color originalColor;                                            // Salva a cor original do jogador.
 
     [Header("Attack Settings")]
     [SerializeField] private float attackCooldownTime = 1.0f;               // Tempo de recarga do ataque.
@@ -68,7 +65,6 @@ public class PlayerMovement : MonoBehaviour
         playerAttack = GetComponent<PlayerAttack>();
 
         rb = GetComponent<Rigidbody>();
-        originalColor = playerRenderer.material.color;
         moveSpeed = walkSpeed;
 
         dashTimer = Time.time - dashCooldownTime;                           // Garante que as habilidades já estejam disponíveis ao iniciar.
@@ -174,25 +170,11 @@ public class PlayerMovement : MonoBehaviour
 
         isDashing = true;
         moveSpeed = dashSpeed;
-
-
-
-
-
-        // Inicio da implementação da imunidade de dano visual.
+        
         if (playerHealth != null)                                           // Ativa a flag de invunerabilidade do jogador no PlayerHealth.
         {
             playerHealth.isInvunerable = true;
         }
-
-        if (playerRenderer != null)
-        {
-            playerRenderer.material.color = dashColor;
-        }
-        // Fim da implementação da imunidade de dano visual.
-
-
-
 
         StartCoroutine(DashCooldown());                                     // Inicia dash temporário.
     }
@@ -204,22 +186,10 @@ public class PlayerMovement : MonoBehaviour
         moveSpeed = walkSpeed;
         dashTimer = Time.time;                                              // Atualiza o tempo do último Dash.
 
-
-
-        // Inicio da implementação da imunidade de dano visual.
         if (playerHealth != null)                                           // Desativa a flag de invunerabilidade do jogador no PlayerHealth.
         {
             playerHealth.isInvunerable = false;
         }
-
-        if (playerRenderer != null)
-        {
-            playerRenderer.material.color = originalColor;
-        }// Fim da implementação da imunidade de dano visual.
-
-
-
-
     }
 
     private void UpdateCooldownUI(Image overlay, float timer, float cooldown)       // Método para atualizar UI de cooldowns (dash, ataque, poção).
