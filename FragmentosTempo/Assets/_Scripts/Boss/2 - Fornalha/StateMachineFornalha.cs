@@ -113,7 +113,7 @@ public class BossStateMachine : MonoBehaviour
     }
 
     bool IsAttackState(State state) => attackStates.Contains(state);
-    
+
     float GetStateDuration(State state)
     {
         switch (state)
@@ -127,7 +127,7 @@ public class BossStateMachine : MonoBehaviour
             default: return 1f;
         }
     }
-    
+
 
     /* ----------- Essa parte e do Fireball ---------------- */
 
@@ -194,7 +194,7 @@ public class BossStateMachine : MonoBehaviour
         }
     }
 
-    
+
 
 
 
@@ -217,52 +217,49 @@ public class BossStateMachine : MonoBehaviour
 
     [Header("Rotation Settings")]
     public float pauseBetweenRotations = 1f;
+    public float rotationSpeedDegreesPerSecond = 180f;
     IEnumerator LavaPondRoutine()
     {
         for (int i = 0; i < 4; i++)
         {
-            // Rotaciona 90° no eixo Y
-            transform.Rotate(Vector3.up, 90f);
+            Quaternion startRot = transform.rotation;
+            Quaternion targetRot = Quaternion.Euler(0f, transform.eulerAngles.y + 90f, 0f);
 
-            // Instancia cone na nova direção
+            // Rota suavemente
+            while (Quaternion.Angle(transform.rotation, targetRot) > 0.1f)
+            {
+                transform.rotation = Quaternion.RotateTowards(
+                    transform.rotation,
+                    targetRot,
+                    rotationSpeedDegreesPerSecond * Time.deltaTime);
+
+                yield return null; // espera o próximo frame
+            }
+
+            // Garante rotação exata
+            transform.rotation = targetRot;
+
+            // Instancia cone
             SpawnCone();
 
             // Espera
             yield return new WaitForSeconds(pauseBetweenRotations);
         }
-
-        void SpawnCone()
-        {
-            if (conePrefab == null) return;
-
-            GameObject cone = Instantiate(conePrefab, transform.position, transform.rotation);
-
-            // Escala baseada no alcance e ângulo (opcional, depende do modelo)
-            // Por exemplo, se o prefab é um cone padrão apontado no eixo Z:
-            float scaleFactor = coneRange;
-            cone.transform.localScale = new Vector3(
-                Mathf.Tan(coneAngle * 0.5f * Mathf.Deg2Rad) * coneRange * 2f, // largura
-                1f,
-                scaleFactor); // profundidade
-
-            Destroy(cone, pauseBetweenRotations); // remove o cone após x segundos (ou o tempo desejado)
-            
-        }
     }
 
-    void OnDrawGizmosSelected()
+    void SpawnCone()
     {
-        Gizmos.color = Color.red;
-        Vector3 forward = transform.forward;
-        Quaternion leftRayRotation = Quaternion.Euler(0, -coneAngle / 2f, 0);
-        Quaternion rightRayRotation = Quaternion.Euler(0, coneAngle / 2f, 0);
+        if (conePrefab == null) return;
 
-        Vector3 leftRay = leftRayRotation * forward * coneRange;
-        Vector3 rightRay = rightRayRotation * forward * coneRange;
+        GameObject cone = Instantiate(conePrefab, transform.position, transform.rotation);
 
-        Gizmos.DrawRay(transform.position, leftRay);
-        Gizmos.DrawRay(transform.position, rightRay);
-        Gizmos.DrawLine(transform.position + leftRay, transform.position + rightRay);
+        float scaleFactor = coneRange;
+        cone.transform.localScale = new Vector3(
+            Mathf.Tan(coneAngle * 0.5f * Mathf.Deg2Rad) * coneRange * 2f, // largura
+            1f,
+            scaleFactor); // profundidade
+
+        Destroy(cone, pauseBetweenRotations); // Dura o tempo da pausa
     }
 
 
