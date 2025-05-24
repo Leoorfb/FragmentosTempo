@@ -1647,6 +1647,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 5967596135676044951, guid: dd211940fc24e814db81be883a815d22,
+        type: 3}
+      propertyPath: m_ApplyRootMotion
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6062106733876610680, guid: dd211940fc24e814db81be883a815d22,
         type: 3}
       propertyPath: aimCamera
