@@ -7,7 +7,7 @@ TagManager:
   - Tree
   - Ground
   - Trice
-  - Head
+  - TriceHead
   layers:
   - Default
   - TransparentFX

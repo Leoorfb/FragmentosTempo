@@ -22,15 +22,7 @@ public class BossHealth : MonoBehaviour
     {
         currentHealth = maxHealth;                                      // Define a vida atual como a vida máxima.
         BossHealthManager.Instance.OnBarSpawned += InitHealthBar;       // Registra o método InitHealthBar no evento OnBarSpawned para inicializar a UI assim que ela for criada.
-    }
-
-    void Update()                                                       // Inicio teste de dano.
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            ApplyDamage(10);
-        }
-    }                                                                   // Fim teste de dano.
+    }                                                            // Fim teste de dano.
 
     private void InitHealthBar(BossHealthBarUI barUI)                   // Método para inicializar a barra de vida com base na cena atual e associa ao nome do boss.
     {

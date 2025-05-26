@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Image lifePotionCDOverlay;                     // UI: overlay que mostra recarga da poção.
 
     [Header("Animation")]
-    [SerializeField] private Animator animator;                             // Referência ao Rigidbody para movimentação física.
+    [SerializeField] private Animator animator;                             // Referência ao Animator do jogador.
 
     private bool isDashing = false;                                         // Flag para verificar se o jogador está usando Dash.
     private float moveSpeed;                                                // Velocidade atual (pode ser walkSpeed ou dashSpeed).
