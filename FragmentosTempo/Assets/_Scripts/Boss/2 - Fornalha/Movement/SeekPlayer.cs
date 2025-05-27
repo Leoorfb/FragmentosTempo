@@ -12,6 +12,11 @@ public class FollowAndRotate : MonoBehaviour
 
         SeekRotate();
         
+        //Código temporario pra teste
+        if (Vector3.Distance(transform.position, target.position) > 3f)
+        {
+            transform.position += transform.forward * moveSpeed * Time.deltaTime;
+        }
     }
 
 
