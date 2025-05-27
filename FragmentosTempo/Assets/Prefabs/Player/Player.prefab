@@ -324,8 +324,6 @@ MonoBehaviour:
   dashCooldownTime: 1.5
   dashDuration: 0.2
   dashCDOverlay: {fileID: 0}
-  playerRenderer: {fileID: 3480535498475128217}
-  dashColor: {r: 0, g: 1, b: 1, a: 1}
   attackCooldownTime: 2
   attackCDOverlay: {fileID: 0}
   SecondAtkCooldownTime: 3

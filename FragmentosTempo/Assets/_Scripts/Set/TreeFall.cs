@@ -48,7 +48,7 @@ public class TreeFall : MonoBehaviour
     {
         if (!isFalling)                                         // Verifica se a árvore não está caindo.
         {
-            if (colliderObject.CompareTag("Trice") || colliderObject.CompareTag("Head"))             // Verificar se colidiu com o Triceratops.
+            if (colliderObject.CompareTag("Trice") || colliderObject.CompareTag("TriceHead"))             // Verificar se colidiu com o Triceratops.
             {
                 isFalling = true;                               // Marca que a árvore cairá.
                 fallTimer = fallDelay;                          // Define o tempo de espera antes da queda.
@@ -79,7 +79,7 @@ public class TreeFall : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)          // Método de entrada de colisões.
     {
-        if (hasFallen && collision.gameObject.CompareTag("Trice") || collision.gameObject.CompareTag("Head"))                          // Verifica se a árvore já caiu e se colidiu com o Triceratops.
+        if (hasFallen && collision.gameObject.CompareTag("Trice") || collision.gameObject.CompareTag("TriceHead"))                          // Verifica se a árvore já caiu e se colidiu com o Triceratops.
         {
             triceTouching = true;                                                           // Marca que o Triceratops está colidindo.
         }
@@ -87,7 +87,7 @@ public class TreeFall : MonoBehaviour
 
     private void OnCollisionExit(Collision collision)           // Método de saída de colisões.
     {
-        if (hasFallen && triceTouching && collision.gameObject.CompareTag("Trice") || collision.gameObject.CompareTag("Head"))         // Verifica se a árvore já caiu e se o Triceratops saiu da colisão.
+        if (hasFallen && triceTouching && collision.gameObject.CompareTag("Trice") || collision.gameObject.CompareTag("TriceHead"))         // Verifica se a árvore já caiu e se o Triceratops saiu da colisão.
         {
             triceTouching = false;                                                          // Marca que o Triceratops não está colidindo.
             StartCoroutine(DestroyAfterDelay());                                            // Inicia a coroutine para destruir a árvore.

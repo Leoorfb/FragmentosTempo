@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class TriceratopsBoss : MonoBehaviour, IBoss
 {
@@ -57,6 +56,7 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
     public LayerMask playerMask;                        // Layer que detecta o jogador para o terremoto.
 
     [Header("References")]
+    [SerializeField] private Animator triceAnimator;    // Animações do Triceratops.
     public Transform headPosition;                      // Posição da cabeça para detectar colisões frontais.
     public LayerMask obstacleMask;                      // Layer que detecta obstáculos.
 
@@ -69,6 +69,7 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
     private bool isStuck = false;                       // Está preso?
     private float stuckTimer;                           // Contador de tempo preso.
 
+    private bool isChase = false;                       // Está perseguindo?
     private bool isCharging = false;                    // Está em investida?
     private bool isPreparingCharge = false;             // Está se preparando para investir?
     private bool hasChargedDamage = false;              // Verifica se o dano já foi aplicado.
@@ -84,6 +85,7 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
     void Awake()
     {
         rb = GetComponent<Rigidbody>();                 // Pega o Rigidbody no início do jogo.
+        triceAnimator = GetComponent<Animator>();       // Pega o Animator no início do jogo.
     }
 
     void Update()
@@ -112,21 +114,20 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
 
         float distanceToPlayer = Vector3.Distance(transform.position, player.position);         // Calcula distância até o jogador.
 
-        if (Time.time >= nextEarthquakeTime && distanceToPlayer <= 7f)
+        if (!isChase && !isPreparingCharge && !isCharging && !isTailAttacking && !isEarthquaking)
         {
-            Earthquake();                           // Se o jogador está perto, e o terremoto está disponível.
+            triceAnimator.SetBool("isIdle", true);
+            triceAnimator.SetBool("isChasing", false);
         }
 
-        if (distanceToPlayer <= tailAttackRange && PlayerIsBehind() && Time.time >= nextTailAttackTime)
+        if (distanceToPlayer <= detectionRange && !isCharging && !isPreparingCharge && !isStuck)
         {
-            TailAttack();                           // Se o jogador está atrás, dentro do alcance e o ataque de cauda está liberado.
-            return;
+            ChasePlayer();                          // Se está perto o suficiente, persegue o jogador.
         }
 
-        if (isCharging)
+        if (distanceToPlayer <= detectionRange && !isCharging)          // Se o jogador está perto e não estiver usando investida, olhar em direção ao jogador.
         {
-            Charge();                                   // Se está investindo, continua o movimento de investida.
-            return;
+            RotateTowards(player.position);
         }
 
         if (distanceToPlayer <= chargeRange && Time.time >= nextChargeTime)         // Se o jogador está perto para iniciar a investida.
@@ -135,14 +136,15 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
             return;
         }
 
-        if (distanceToPlayer <= detectionRange)
+        if (Time.time >= nextEarthquakeTime && distanceToPlayer <= 7f)
         {
-            ChasePlayer();                          // Se está perto o suficiente, persegue o jogador.
+            Earthquake();                           // Se o jogador está perto, e o terremoto está disponível.
         }
 
-        if (distanceToPlayer <= detectionRange && !isCharging)          // Se o jogador está perto e não estiver usando investida, olhar em direção ao jogador.
+        if (distanceToPlayer <= tailAttackRange && PlayerIsBehind() && Time.time >= nextTailAttackTime && !isStuck)
         {
-            RotateTowards(player.position);
+            TailAttack();                           // Se o jogador está atrás, dentro do alcance e o ataque de cauda está liberado.
+            return;
         }
     }
 
@@ -162,8 +164,13 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
 
     void ChasePlayer()                                      // Método para perseguir o player.
     {
+        isChase = true;
+        triceAnimator.SetBool("isIdle", false);
+        triceAnimator.SetBool("isChasing", true);
+
         Vector3 direction = (player.position - transform.position).normalized;
         rb.MovePosition(transform.position + direction * chaseSpeed * Time.deltaTime);
+
         RotateTowards(player.position);
     }
 
@@ -172,31 +179,36 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
         if (isPreparingCharge || Time.time < nextChargeTime) return;            // Se já está preparando a investida ou ainda não passou o tempo de recarga, sai do método.
 
         isPreparingCharge = true;                                               // Define que o Trice agora está no estado de preparação da investida
+        isChase = false;
         rb.velocity = Vector3.zero;                                             // Para o movimento atual, zerando a velocidade
+
+        triceAnimator.SetBool("IsChasing", false);
+        triceAnimator.SetBool("isPreparingCharge", true);
 
         chargeTarget = player.position;                                         // Guarda a posição atual do jogador como alvo da investida.
         chargeDirection = (chargeTarget - transform.position).normalized;       // Calcula a direção da investida, do inimigo até o jogador.
 
         Debug.Log("Preparando investida...");
 
-        Invoke(nameof(StartCharge), chargePrepareTime);                         // Agenda a chamada do método StartCharge após um tempo de preparação
-    }
-
-    void StartCharge()                                      // Método para iniciar a investida.
-    {
-        Debug.Log("Inciando investida!");
-        isPreparingCharge = false;
-        isCharging = true;
-        nextChargeTime = Time.time + chargeCooldown;        // Define o cooldown para a próxima investida.
+        Invoke(nameof(Charge), chargePrepareTime);                         // Agenda a chamada do método StartCharge após um tempo de preparação
     }
 
     void Charge()                                           // Método para realizar a investida.
     {
+        Debug.Log("Inciando investida!");
+        isPreparingCharge = false;
+        isCharging = true;
+
+        triceAnimator.SetBool("isPreparingCharge", false);
+        triceAnimator.SetBool("isCharging", true);
+
         if (Physics.Raycast(headPosition.position, chargeDirection, out RaycastHit hit, 2f, obstacleMask))          // Raycast para detectar colisão frontal com obstáculo
         {
             if (hit.collider.CompareTag("Tree"))
             {
                 GetStuck();                         // Se acertar uma árvore, fica preso.
+                triceAnimator.SetBool("isCharging", false);
+                triceAnimator.SetBool("isIdle", true);
                 return;
             }
         }
@@ -208,25 +220,30 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
         {
             EndCharge();                                    // Finaliza a investida.
         }
+
+        nextChargeTime = Time.time + chargeCooldown;        // Define o cooldown para a próxima investida.
     }
 
     void EndCharge()                                        // Método para finalizar a investida.
     {
         isCharging = false;
         hasChargedDamage = false;                           // Reseta para permitir dano na próxima investida.
+        triceAnimator.SetBool("isCharging", false);
         Debug.Log("Trice terminou a investida");
         RotateTowards(player.position);
     }
 
     void TailAttack()                                       // Método para iniciar o golpe da cauda.
     {
-        if (isTailAttacking) return;                                                                // Se já estiver atacando, não iniciar outro ataque.
+        if (isTailAttacking || isStuck) return;                                                                // Se já estiver atacando, não iniciar outro ataque.
 
         Debug.Log("Triceratops deu um golpe de cauda!");
         isTailAttacking = true;
         nextTailAttackTime = Time.time + tailAttackCooldown;                                        // Ativa cooldown do golpe de cauda.
 
         rb.velocity = Vector3.zero;                                                                 // Para o movimento do Triceratops.
+
+        triceAnimator.SetTrigger("isTailAttacking");
 
         Collider[] hitColliders = Physics.OverlapSphere(transform.position, tailAttackRange, playerMask);       // Detecta o jogador atrás e dentro da área de ataque da cauda.
         foreach (var hit in hitColliders)
@@ -260,7 +277,7 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
 
     void Earthquake()                                       // Método para iniciar o terremoto.
     {
-        if (isEarthquaking || !isOnGround) return;                      // Se já está em terremoto e não está no chão, ignora.
+        if (isEarthquaking || !isOnGround || isStuck) return;                      // Se já está em terremoto e não está no chão, ignora.
 
         isEarthquaking = true;
         earthquakeImpactDone = false;                                   // Reseta o controle.
@@ -268,6 +285,7 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
         nextEarthquakeTime = Time.time + earthquakeCooldown;            // Ativa cooldown do terremoto.
 
         rb.velocity = Vector3.zero;                                     // Para o movimento.
+        triceAnimator.SetTrigger("isEathquake");
         rb.AddForce(Vector3.up * 8f, ForceMode.Impulse);
 
         Invoke(nameof(ImpactEarthquake), 0.7f);
@@ -315,9 +333,15 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
         isStuck = true;
         isCharging = false;
         isPreparingCharge = false;
+        isChase = false;
         stuckTimer = stuckTime;                                                                     // Inicia o contador para se soltar.
         rb.velocity = Vector3.zero;
         rb.isKinematic = true;                                                                      // Deixa o Rigidbody sem física para não ficar deslizando.
+
+        triceAnimator.SetBool("isChasing", false);
+        triceAnimator.SetBool("isPreparingCharge", false);
+        triceAnimator.SetBool("isCharging", false);
+        triceAnimator.SetBool("isIdle", true);
     }
 
     void HandleStuck()                                      // Método para lidar com o aprisionar.

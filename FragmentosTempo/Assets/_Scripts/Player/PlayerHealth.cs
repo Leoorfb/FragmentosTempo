@@ -35,15 +35,6 @@ public class PlayerHealth : MonoBehaviour
         UpdatePotionUI();                                   // Atualiza a UI de poções.
     }
 
-    // Teste de dano.
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.R))
-        {
-            TakeDamage(10);
-        }
-    } // Fim teste de dano.
-
     public void TakeDamage(int damage)                      // Método para aplicar dano ao jogador.
     {
         if (isInvunerable)                                  // Verificar se está invunerável.
