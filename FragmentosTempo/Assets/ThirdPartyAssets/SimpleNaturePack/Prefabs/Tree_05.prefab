@@ -130,11 +130,11 @@ Rigidbody:
     m_Bits: 0
   m_ImplicitCom: 1
   m_ImplicitTensor: 1
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 1
   m_Interpolate: 0
   m_Constraints: 0
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!114 &1898926828386930094
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,10 +147,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cf0427a49ae08541a753a9561384702, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FallSpeed: 5
-  fallDelay: 0.5
-  fallTimer: 0
+  fallSpeed: 20
+  fallAngle: 90
+  currentAngle: 0
   destroyDelay: 2.5
   healthPotionPrefab: {fileID: 8419388196199256599, guid: b8c09ea722234b24c946ebfee225ebd3,
     type: 3}
   dropChance: 0.5
+  hasFallen: 0
+  fallDirection: {x: 0, y: 0, z: 0}
