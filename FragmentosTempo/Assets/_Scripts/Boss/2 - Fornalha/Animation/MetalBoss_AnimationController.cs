@@ -55,6 +55,11 @@ public class MetalBoss_AnimationController : MonoBehaviour
             yield return new WaitForEndOfFrame();
         }
     }
+
+    public void Jump()
+    {
+
+    }
 }
 
 public enum GradeState
