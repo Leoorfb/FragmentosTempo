@@ -8,6 +8,7 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float walkSpeed = 5f;                          // Velocidade padrão de movimentação do jogador.
     public bool canMove = true;                                             // Controle externo para ativar/desativar movimento (ex: durante diálogos).
+    public bool isStunned = false;
 
     [Header("Dash Settings")]
     [SerializeField] private float dashSpeed = 12f;                         // Velocidade durante o dash.
@@ -145,6 +146,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (isStunned)
+            return;
+
         if (!canMove)
         {
             rb.velocity = Vector3.zero;
@@ -319,5 +323,12 @@ public class PlayerMovement : MonoBehaviour
 
         animator.SetFloat("speedX", dotX);
         animator.SetFloat("speedZ", dotZ);
+    }
+
+    private IEnumerator Stun(float stunDuration)
+    {
+        isStunned = true;
+        yield return new WaitForSeconds(stunDuration);
+        isStunned = false;
     }
 }
