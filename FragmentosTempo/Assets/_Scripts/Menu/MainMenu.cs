@@ -20,9 +20,8 @@ public class MainMenu : MonoBehaviour
 
     public void Play()                                                          // Método chamado quando o jogador clica no botão "Play".
     {
-        SceneManager.LoadScene("BossTrice");                                    // Carrega a cena do jogo (BossTrice).
+        LoadingScreenManager.Instance.SwitchToScene(1);
         MusicManager.Instance.PlayMusic("Game");                                // Toca a música do jogo após iniciar a cena.
-
     }
 
     public void Quit()                                                          // Método chamado quando o jogador clica no botão "Quit".

@@ -15,7 +15,6 @@ public class BossHealth : MonoBehaviour
     {
         { "BossTrice", "Triceratops" },
         { "BossFornalha", "Fornalha"},
-        { "BossFinal", "Final Boss"},
     };
 
     void Start()

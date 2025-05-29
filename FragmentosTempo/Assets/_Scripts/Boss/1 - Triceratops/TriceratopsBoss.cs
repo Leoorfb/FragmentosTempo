@@ -109,7 +109,7 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
 
         if (!canMove)                                   // Verifica se o movimento está desabilitado.
         {
-            rb.velocity = Vector3.zero;
+            StopKinematic();
             return;
         }
 
@@ -411,7 +411,7 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
         isCharging = false;
         isPreparingCharge = false;
         stuckTimer = stuckTime;                                                                     // Inicia o contador para se soltar.
-        rb.velocity = Vector3.zero;
+        StopKinematic();
         rb.isKinematic = true;                                                                      // Deixa o Rigidbody sem física para não ficar deslizando.
         stateMachine.ChangeState(TriceratopsState.Stuck);
     }
@@ -440,6 +440,8 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
         isRotatingAfterUnstuck = true;
 
         stateMachine.ChangeState(TriceratopsState.Idle);
+
+        canMove = true;
     }
 
     private void OnCollisionEnter(Collision collision)      // Método de colisões.
@@ -481,6 +483,14 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
                     }
                 }
             }
+        }
+    }
+
+    private void StopKinematic()
+    {
+        if (!rb.isKinematic)
+        {
+            rb.velocity = Vector3.zero;
         }
     }
 

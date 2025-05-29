@@ -10,13 +10,10 @@ EditorBuildSettings:
     guid: 3385f2d5fd551bc4bacf384a548b018f
   - enabled: 1
     path: Assets/Scenes/BossTrice.unity
-    guid: d5c49e0e186251a488189279a7786f5b
+    guid: ddfe259f551803a4fad3948af100ea9e
   - enabled: 1
     path: Assets/Scenes/BossFornalha.unity
     guid: af2ee1939b541e64692d15d8f86712b8
-  - enabled: 1
-    path: Assets/Scenes/BossFinal.unity
-    guid: df77c1c0df1a7a34f8e219d26b5d66bb
   - enabled: 1
     path: Assets/Scenes/Game.unity
     guid: b4f127f9758784b4c9e0933303ba0886

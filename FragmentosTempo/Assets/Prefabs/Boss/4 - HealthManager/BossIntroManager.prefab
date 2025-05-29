@@ -44,5 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73b9a80dcb47e2e41a16dd008d5c8e0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  delayToActivate: 2
+  delayToActivate: 5
   dialogBox: {fileID: 0}
