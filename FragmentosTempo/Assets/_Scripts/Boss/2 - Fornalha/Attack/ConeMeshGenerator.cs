@@ -1,6 +1,9 @@
 using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
 
-[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
+
+[RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class ConeMeshGenerator : MonoBehaviour
 {
     [Header("Cone Settings")]
@@ -8,9 +11,19 @@ public class ConeMeshGenerator : MonoBehaviour
     public float coneRange = 5f;
     public int segments = 30;
 
+    [Header("Damage Settings")]
+    public int damage = 10;
+    public float duration = 3f;
+    public float damageTickRate = 1f;
+    public LayerMask targetLayers;
+
+    private float timer = 0f;
+    private List<Vector3> coneVertices = new List<Vector3>();
+
     void Start()
     {
         GenerateFlatCone();
+        StartCoroutine(DamageOverTime());
     }
 
     void GenerateFlatCone()
@@ -49,65 +62,69 @@ public class ConeMeshGenerator : MonoBehaviour
 
         // Aplicar ao MeshFilter e MeshCollider
         GetComponent<MeshFilter>().mesh = mesh;
-
-        MeshCollider mc = GetComponent<MeshCollider>();
-        mc.sharedMesh = null;
-        mc.sharedMesh = mesh;
-        mc.convex = true;
-        mc.isTrigger = true;
     }
 
 
-    [SerializeField] private int damage = 10;
-    [SerializeField] private float duration = 3f;
-    [SerializeField] private LayerMask targetLayers; // Defina quais camadas devem ser afetadas (ex: "Inimigo")
-
-    private void OnTriggerEnter(Collider other)
+    IEnumerator DamageOverTime()
     {
-        if ((targetLayers.value & (1 << other.gameObject.layer)) == 0)
-            return; // Ignora objetos fora da camada desejada
-
-        // Exemplo: aplica dano se tiver um script "Health"
-        PlayerHealth hp = other.GetComponent<PlayerHealth>();
-        if (hp != null)
+        while (timer < duration)
         {
-            hp.TakeDamage(damage);
+            ApplyConeDamage();
+            yield return new WaitForSeconds(damageTickRate);
+            timer += damageTickRate;
+        }
+
+        Destroy(gameObject);
+    }
+
+    void ApplyConeDamage()
+    {
+        Collider[] hits = Physics.OverlapSphere(transform.position, coneRange, targetLayers);
+
+        foreach (var hit in hits)
+        {
+            Vector3 dirToTarget = (hit.transform.position - transform.position).normalized;
+            float angleToTarget = Vector3.Angle(transform.forward, dirToTarget);
+            float dist = Vector3.Distance(transform.position, hit.transform.position);
+
+            if (angleToTarget <= coneAngle / 2f && dist <= coneRange)
+            {
+                PlayerHealth hp = hit.GetComponent<PlayerHealth>();
+                if (hp != null)
+                {
+                    hp.TakeDamage(damage);
+                }
+            }
         }
     }
 
     void OnDrawGizmosSelected()
     {
-        // Configurações do cone
-        float angle = coneAngle;
-        float range = coneRange;
-        int steps = 30;
-
         Gizmos.color = Color.red;
-        Vector3 origin = transform.position;
-        Vector3 forward = transform.forward;
 
-        // Desenha linhas radiais do cone
-        for (int i = 0; i <= steps; i++)
+        Vector3 forward = transform.forward * coneRange;
+        Quaternion leftRot = Quaternion.Euler(0, -coneAngle / 2f, 0);
+        Quaternion rightRot = Quaternion.Euler(0, coneAngle / 2f, 0);
+
+        Vector3 leftDir = leftRot * forward;
+        Vector3 rightDir = rightRot * forward;
+
+        Gizmos.DrawLine(transform.position, transform.position + leftDir);
+        Gizmos.DrawLine(transform.position, transform.position + rightDir);
+
+        int steps = 20;
+        for (int i = 0; i < steps; i++)
         {
-            float stepAngle = -angle / 2 + (angle * i / steps);
-            Quaternion rot = Quaternion.Euler(0, stepAngle, 0);
-            Vector3 dir = rot * forward;
-            Gizmos.DrawLine(origin, origin + dir * range);
-        }
+            float t1 = i / (float)steps;
+            float t2 = (i + 1) / (float)steps;
 
-        // Desenha arco externo (base do cone)
-        Vector3 lastPoint = Vector3.zero;
-        for (int i = 0; i <= steps; i++)
-        {
-            float stepAngle = -angle / 2 + (angle * i / steps);
-            Quaternion rot = Quaternion.Euler(0, stepAngle, 0);
-            Vector3 dir = rot * forward;
-            Vector3 point = origin + dir * range;
+            float angle1 = Mathf.Lerp(-coneAngle / 2f, coneAngle / 2f, t1) * Mathf.Deg2Rad;
+            float angle2 = Mathf.Lerp(-coneAngle / 2f, coneAngle / 2f, t2) * Mathf.Deg2Rad;
 
-            if (i > 0)
-                Gizmos.DrawLine(lastPoint, point);
+            Vector3 point1 = transform.position + new Vector3(Mathf.Sin(angle1), 0, Mathf.Cos(angle1)) * coneRange;
+            Vector3 point2 = transform.position + new Vector3(Mathf.Sin(angle2), 0, Mathf.Cos(angle2)) * coneRange;
 
-            lastPoint = point;
+            Gizmos.DrawLine(point1, point2);
         }
     }
 

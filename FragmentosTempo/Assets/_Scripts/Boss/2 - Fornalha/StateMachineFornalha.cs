@@ -21,10 +21,9 @@ public class BossStateMachine : MonoBehaviour
     private List<State> attackStates = new List<State>
     {
         State.JumpAttack,
-        /*
         State.Fireball,
         State.LavaPond,
-        */
+        
     };
 
     private Coroutine stateRoutine;
@@ -79,7 +78,7 @@ public class BossStateMachine : MonoBehaviour
         */
         switch (state)
         {
-            /*
+            
             case State.Fireball:
                 yield return StartCoroutine(FireballRoutine());
                 break;
@@ -87,7 +86,6 @@ public class BossStateMachine : MonoBehaviour
             case State.LavaPond:
                 yield return StartCoroutine(LavaPondRoutine());
                 break;
-            */
             case State.JumpAttack:
                 yield return StartCoroutine(JumpAttackRoutine());
                 break;

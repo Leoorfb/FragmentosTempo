@@ -12,7 +12,6 @@ GameObject:
   - component: {fileID: 3859094874233041237}
   - component: {fileID: 3122719897781275530}
   - component: {fileID: 547034722289026768}
-  - component: {fileID: 7427121744552540371}
   m_Layer: 0
   m_Name: Cone
   m_TagString: Untagged
@@ -102,28 +101,7 @@ MonoBehaviour:
   segments: 32
   damage: 10
   duration: 3
+  damageTickRate: 1
   targetLayers:
     serializedVersion: 2
     m_Bits: 256
---- !u!64 &7427121744552540371
-MeshCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3260540597721220080}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 5
-  m_Convex: 1
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
