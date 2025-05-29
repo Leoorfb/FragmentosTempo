@@ -325,9 +325,10 @@ public class PlayerMovement : MonoBehaviour
         animator.SetFloat("speedZ", dotZ);
     }
 
-    private IEnumerator Stun(float stunDuration)
+    public IEnumerator Stun(float stunDuration)
     {
         isStunned = true;
+        Debug.Log("Ta stunado");
         yield return new WaitForSeconds(stunDuration);
         isStunned = false;
     }

@@ -44,7 +44,8 @@ public class PlayerHealth : MonoBehaviour
         }
 
         currentHealth -= damage;                                        // Subtrai o valor do dano da vida atual.
-        DamagePopUpGenerator.current.CreatePopUp(transform.position, damage.ToString(), Color.yellow);      // Exibe na tela o dano sofrido.
+        if (DamagePopUpGenerator.current != null)
+            DamagePopUpGenerator.current.CreatePopUp(transform.position, damage.ToString(), Color.yellow);      // Exibe na tela o dano sofrido.
         currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);       // Garante que a vida não passe de 0 ou da vida máxima.
         UpdateHealthUI();                                               // Atualiza a barra de vida na UI.
 

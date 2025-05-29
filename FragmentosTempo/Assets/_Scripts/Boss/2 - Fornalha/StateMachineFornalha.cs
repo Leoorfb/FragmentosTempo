@@ -21,8 +21,10 @@ public class BossStateMachine : MonoBehaviour
     private List<State> attackStates = new List<State>
     {
         State.JumpAttack,
+        /*
         State.Fireball,
         State.LavaPond,
+        */
     };
 
     private Coroutine stateRoutine;
@@ -77,12 +79,15 @@ public class BossStateMachine : MonoBehaviour
         */
         switch (state)
         {
+            /*
             case State.Fireball:
                 yield return StartCoroutine(FireballRoutine());
                 break;
+            
             case State.LavaPond:
                 yield return StartCoroutine(LavaPondRoutine());
                 break;
+            */
             case State.JumpAttack:
                 yield return StartCoroutine(JumpAttackRoutine());
                 break;
@@ -332,7 +337,7 @@ public class BossStateMachine : MonoBehaviour
                 Collider col = trigger.GetComponent<Collider>();
                 if (col != null)
                 {
-                StartCoroutine(EnableTriggerTemporarily(col, 1f)); // só ativa por 0.2s
+                StartCoroutine(EnableTriggerTemporarily(col, 3f)); // só ativa por 0.2s
                 }
             }
 
