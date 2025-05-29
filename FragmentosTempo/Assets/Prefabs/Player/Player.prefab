@@ -320,6 +320,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   walkSpeed: 5
   canMove: 1
+  isStunned: 0
   dashSpeed: 12
   dashCooldownTime: 1.5
   dashDuration: 0.2
