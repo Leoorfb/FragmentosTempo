@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class MetalBoss_AnimationController : MonoBehaviour
 {
-    [SerializeField] private Grade[] grades;
+    public Grade[] grades;
     [SerializeField] private float openingSpeed;
 
     // Start is called before the first frame update

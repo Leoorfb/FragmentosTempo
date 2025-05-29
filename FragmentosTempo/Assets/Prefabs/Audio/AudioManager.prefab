@@ -49,13 +49,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ea52a5732885049be84a8dea577789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffects:
-  - groupID: Attack
-    clips:
-    - {fileID: 8300000, guid: 68d3afbd8d6625e4eace9e75d948c9db, type: 3}
-  - groupID: Jump
-    clips:
-    - {fileID: 8300000, guid: f88a176e0961bc84d93f5650a1f6c3b4, type: 3}
+  soundEffects: []
 --- !u!114 &7888205435358833563
 MonoBehaviour:
   m_ObjectHideFlags: 0
