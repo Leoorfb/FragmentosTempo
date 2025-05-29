@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public class BossStateMachine : MonoBehaviour
 {
+    public Rigidbody rb;
     public enum State
     {
         Patrol,
@@ -11,7 +12,6 @@ public class BossStateMachine : MonoBehaviour
         JumpAttack,
         Fireball,
         LavaPond,
-        ScaldingSmoke
     }
 
     private State currentState = State.Patrol;
@@ -23,9 +23,6 @@ public class BossStateMachine : MonoBehaviour
         State.JumpAttack,
         State.Fireball,
         State.LavaPond,
-        /*
-        State.ScaldingSmoke
-        */
     };
 
     private Coroutine stateRoutine;
@@ -86,7 +83,9 @@ public class BossStateMachine : MonoBehaviour
             case State.LavaPond:
                 yield return StartCoroutine(LavaPondRoutine());
                 break;
-
+            case State.JumpAttack:
+                yield return StartCoroutine(JumpAttackRoutine());
+                break;
             // Criar case Para todas os outros estados
             //No momento so RotateFireball
             default:
@@ -123,7 +122,6 @@ public class BossStateMachine : MonoBehaviour
             case State.JumpAttack: return 3f;
             case State.Fireball: return 4f;
             case State.LavaPond: return 5f;
-            case State.ScaldingSmoke: return 3.5f;
             default: return 1f;
         }
     }
@@ -210,6 +208,8 @@ public class BossStateMachine : MonoBehaviour
 
     /* ---------------- FIM do RotateFireball ------------- */
 
+    /*----------------------Inicio COne ---------------------*/
+
     [Header("Cone Settings")]
     public GameObject conePrefab; // Prefab do cone a instanciar
     public float coneAngle = 45f;
@@ -252,15 +252,113 @@ public class BossStateMachine : MonoBehaviour
         if (conePrefab == null) return;
 
         GameObject cone = Instantiate(conePrefab, transform.position, transform.rotation);
-
-        float scaleFactor = coneRange;
-        cone.transform.localScale = new Vector3(
-            Mathf.Tan(coneAngle * 0.5f * Mathf.Deg2Rad) * coneRange * 2f, // largura
-            1f,
-            scaleFactor); // profundidade
-
         Destroy(cone, pauseBetweenRotations); // Dura o tempo da pausa
     }
 
+    /*------------------------------Fim do Cone-------------------------------*/
 
+    /*------------------------------Inicio Pulo-----------------------------*/
+
+    [Header("Jump Config")]
+    public float jumpForce = 10f;
+    public float airTime = 1.5f;
+    public float trackingTime = 0.7f;
+    public float trackingSpeed = 5f;
+    [Header("References")]
+    public GameObject blobShadowPrefab;
+    public GameObject impactHexPrefab;
+    public LayerMask groundMask;
+
+    [Header("Impact Config")]
+    public float pushForce = 5f;
+    public float impactRadius = 5f;
+    public int impactDamage = 30;
+    public float aoeDuration = 3f;
+    public int dps = 5;
+
+    private GameObject blobShadow;
+    private bool isJumping;
+    IEnumerator JumpAttackRoutine()
+    {
+            isJumping = true;
+            rb.useGravity = true;
+            rb.velocity = Vector3.up * jumpForce;
+
+            GetComponent<Collider>().enabled = false;
+
+            // Corrige rotação
+            transform.rotation = Quaternion.Euler(0, transform.eulerAngles.y, 0);
+            rb.angularVelocity = Vector3.zero;
+
+            // Instancia sombra
+            blobShadow = Instantiate(blobShadowPrefab, transform.position, Quaternion.identity);
+            blobShadow.transform.localScale = Vector3.zero;
+
+            float t = 0f;
+
+            // Acompanha o player
+            while (t < trackingTime)
+            {
+                if (target && blobShadow)
+                {
+                    Vector3 targetPos = new Vector3(target.position.x, 0, target.position.z);
+                    blobShadow.transform.position = Vector3.Lerp(blobShadow.transform.position, targetPos, Time.deltaTime * trackingSpeed);
+                    blobShadow.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, t / trackingTime);
+                }
+
+                t += Time.deltaTime;
+                yield return null;
+            }
+
+            yield return new WaitForSeconds(airTime - trackingTime);
+
+            // Teleporta para posição de queda
+            Vector3 landPos = blobShadow.transform.position + Vector3.up * 15f;
+            transform.position = landPos;
+            rb.velocity = Vector3.zero;
+            rb.useGravity = true;
+            GetComponent<Collider>().enabled = true;
+
+            // Espera cair no chão
+            while (!Physics.Raycast(transform.position, Vector3.down, 1f, groundMask))
+            {
+                
+                yield return null;
+            }
+
+            LandingTrigger trigger = GetComponentInChildren<LandingTrigger>();
+            if (trigger != null)
+            {
+                Collider col = trigger.GetComponent<Collider>();
+                if (col != null)
+                {
+                StartCoroutine(EnableTriggerTemporarily(col, 1f)); // só ativa por 0.2s
+                }
+            }
+
+        Destroy(blobShadow, 0.3f);
+            isJumping = false;
+
+            // Instancia o círculo de dano ao cair
+            if (impactHexPrefab != null)
+            {
+                Instantiate(impactHexPrefab, transform.position, Quaternion.identity);
+            }
+            
+
+
+
+        
+    }
+
+    IEnumerator EnableTriggerTemporarily(Collider col, float duration)
+    {
+        col.enabled = true;
+        yield return new WaitForSeconds(duration);
+        col.enabled = false;
+    }
+
+
+
+    /*------------------------------Fim do Pulo----------------------------*/
 }
