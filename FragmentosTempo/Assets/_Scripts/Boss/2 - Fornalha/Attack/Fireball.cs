@@ -5,7 +5,7 @@ public class Fireball : MonoBehaviour
 {
     public Transform target;
     public float trajectoryHeight = 5f; // Altura máxima do arco
-
+    public int damageAmount = 25;
     private Rigidbody rb;
 
     void Start()
@@ -50,6 +50,16 @@ public class Fireball : MonoBehaviour
 
         // Aplicar impulso
         rb.AddForce(initialVelocity, ForceMode.Impulse);
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerHealth health = other.GetComponent<PlayerHealth>();
+            if (health != null)
+                health.TakeDamage(damageAmount);
+        }
     }
 
 
