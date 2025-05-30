@@ -241,6 +241,86 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e4557a20f2b76be46a2f938799aa94ae, type: 3}
+--- !u!1001 &179222843
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 886058567128367392, guid: e1f311b513b22c44fbacba2328b0ec1c,
+        type: 3}
+      propertyPath: m_Name
+      value: DamagePop-UP Generator
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686695973766037342, guid: e1f311b513b22c44fbacba2328b0ec1c,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686695973766037342, guid: e1f311b513b22c44fbacba2328b0ec1c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686695973766037342, guid: e1f311b513b22c44fbacba2328b0ec1c,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686695973766037342, guid: e1f311b513b22c44fbacba2328b0ec1c,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686695973766037342, guid: e1f311b513b22c44fbacba2328b0ec1c,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686695973766037342, guid: e1f311b513b22c44fbacba2328b0ec1c,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686695973766037342, guid: e1f311b513b22c44fbacba2328b0ec1c,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686695973766037342, guid: e1f311b513b22c44fbacba2328b0ec1c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686695973766037342, guid: e1f311b513b22c44fbacba2328b0ec1c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7686695973766037342, guid: e1f311b513b22c44fbacba2328b0ec1c,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e1f311b513b22c44fbacba2328b0ec1c, type: 3}
+--- !u!114 &252326137 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7582283025868413955, guid: e4557a20f2b76be46a2f938799aa94ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 32613697}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &273841821 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1662902282595776129, guid: e4557a20f2b76be46a2f938799aa94ae,
@@ -602,6 +682,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2038415906809494506}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1309285985 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1893864326826013671, guid: e4557a20f2b76be46a2f938799aa94ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 32613697}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1379109652
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -848,9 +940,9 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1022557525}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1833903101 stripped
+--- !u!114 &1930904138 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6395186934161694643, guid: e4557a20f2b76be46a2f938799aa94ae,
+  m_CorrespondingSourceObject: {fileID: 3334933938627914425, guid: e4557a20f2b76be46a2f938799aa94ae,
     type: 3}
   m_PrefabInstance: {fileID: 32613697}
   m_PrefabAsset: {fileID: 0}
@@ -860,9 +952,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1930904138 stripped
+--- !u!114 &1965153503 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 3334933938627914425, guid: e4557a20f2b76be46a2f938799aa94ae,
+  m_CorrespondingSourceObject: {fileID: 7448538114209579528, guid: e4557a20f2b76be46a2f938799aa94ae,
     type: 3}
   m_PrefabInstance: {fileID: 32613697}
   m_PrefabAsset: {fileID: 0}
@@ -1008,7 +1100,7 @@ PrefabInstance:
         type: 3}
       propertyPath: healthBarImage
       value: 
-      objectReference: {fileID: 1833903101}
+      objectReference: {fileID: 1965153503}
     - target: {fileID: 227564338538363808, guid: dd211940fc24e814db81be883a815d22,
         type: 3}
       propertyPath: potionCountText
@@ -1066,6 +1158,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 812597733632668408, guid: dd211940fc24e814db81be883a815d22,
         type: 3}
+      propertyPath: ultCDOverlay
+      value: 
+      objectReference: {fileID: 1309285985}
+    - target: {fileID: 812597733632668408, guid: dd211940fc24e814db81be883a815d22,
+        type: 3}
       propertyPath: dashCDOverlay
       value: 
       objectReference: {fileID: 273841821}
@@ -1079,6 +1176,11 @@ PrefabInstance:
       propertyPath: SecondAtkCDOverlay
       value: 
       objectReference: {fileID: 1930904138}
+    - target: {fileID: 812597733632668408, guid: dd211940fc24e814db81be883a815d22,
+        type: 3}
+      propertyPath: lifePotionCDOverlay
+      value: 
+      objectReference: {fileID: 252326137}
     - target: {fileID: 1317785343131855425, guid: dd211940fc24e814db81be883a815d22,
         type: 3}
       propertyPath: m_Name
@@ -1240,3 +1342,4 @@ SceneRoots:
   - {fileID: 2038415906809494506}
   - {fileID: 32613697}
   - {fileID: 1379109652}
+  - {fileID: 179222843}
