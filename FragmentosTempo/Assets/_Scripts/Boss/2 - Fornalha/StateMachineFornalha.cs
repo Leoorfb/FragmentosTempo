@@ -57,25 +57,6 @@ public class BossStateMachine : MonoBehaviour
                 lastAttackState = state;
             }
         }
-        /*      ANTIGO 
-        // Simulação de duração dos estados
-        float duration = GetStateDuration(state);
-        yield return new WaitForSeconds(duration);
-
-        // Decidir próximo estado
-        if (state == State.Patrol)
-        {
-            ChangeState(State.Attack);
-        }
-        else if (state == State.Attack)
-        {
-            ChangeState(GetNextAttackState());
-        }
-        else
-        {
-            ChangeState(State.Attack);
-        }
-        */
         switch (state)
         {
             
@@ -89,8 +70,6 @@ public class BossStateMachine : MonoBehaviour
             case State.JumpAttack:
                 yield return StartCoroutine(JumpAttackRoutine());
                 break;
-            // Criar case Para todas os outros estados
-            //No momento so RotateFireball
             default:
                 yield return new WaitForSeconds(GetStateDuration(state));
                 break;
@@ -304,7 +283,7 @@ public class BossStateMachine : MonoBehaviour
             {
                 if (target && blobShadow)
                 {
-                    Vector3 targetPos = new Vector3(target.position.x, 0, target.position.z);
+                    Vector3 targetPos = new Vector3(target.position.x, 0.5f, target.position.z);
                     blobShadow.transform.position = Vector3.Lerp(blobShadow.transform.position, targetPos, Time.deltaTime * trackingSpeed);
                     blobShadow.transform.localScale = Vector3.Lerp(Vector3.zero, Vector3.one, t / trackingTime);
                 }
@@ -339,7 +318,9 @@ public class BossStateMachine : MonoBehaviour
                 }
             }
 
-        Destroy(blobShadow, 0.3f);
+            Destroy(blobShadow, 0.1f);
+
+            GetComponent<Collider>().enabled = true;
             isJumping = false;
 
             // Instancia o círculo de dano ao cair

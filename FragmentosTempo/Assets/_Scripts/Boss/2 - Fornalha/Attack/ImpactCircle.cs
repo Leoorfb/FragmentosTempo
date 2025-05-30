@@ -7,7 +7,7 @@ public class ImpactCircle : MonoBehaviour
 {
     public float duration = 3f;
     public float radius = 3f;
-    public int damageAmount = 20;
+    public int damageAmount = 10;
     public int sides = 6; // hexágono 
     public float tickRate = 1f; // segundos entre cada dano
 
@@ -50,7 +50,7 @@ public class ImpactCircle : MonoBehaviour
         {
             PlayerHealth health = other.GetComponent<PlayerHealth>();
             if (health != null)
-                playersInZone.Add(health);
+                health.TakeDamage(damageAmount);
         }
     }
 
@@ -60,7 +60,7 @@ public class ImpactCircle : MonoBehaviour
         {
             PlayerHealth health = other.GetComponent<PlayerHealth>();
             if (health != null)
-                playersInZone.Remove(health);
+                health.TakeDamage(damageAmount);
         }
     }
 
@@ -79,7 +79,7 @@ public class ImpactCircle : MonoBehaviour
             float angle = Mathf.Deg2Rad * i * angleStep;
             float x = Mathf.Cos(angle) * radius;
             float z = Mathf.Sin(angle) * radius;
-            vertices[i + 1] = new Vector3(x, 0, z);
+            vertices[i + 1] = new Vector3(x, -0.5f, z);
         }
 
         for (int i = 0; i < sides; i++)
