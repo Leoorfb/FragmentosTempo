@@ -61,6 +61,7 @@ public class PlayerHealth : MonoBehaviour
         {
             currentHealth += potionHealAmount;                          // Aumenta a vida com base no valor de cura da poção.
             DamagePopUpGenerator.current.CreatePopUp(transform.position, potionHealAmount.ToString(), Color.green);         // Exibe na tela a vida recuperada.
+            SoundManager.Instance.PlaySound3D("DrinkPotion", transform.position);
             currentHealth = Mathf.Clamp(currentHealth, 0, maxHealth);   // Garante que a vida não ultrapasse a máxima.
             potionCount--;                                              // Reduz o número de poções disponíveis.
             UpdateHealthUI();                                           // Atualiza a barra de vida na interface.

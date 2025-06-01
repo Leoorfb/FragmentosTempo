@@ -20,8 +20,8 @@ public class MainMenu : MonoBehaviour
 
     public void Play()                                                          // Método chamado quando o jogador clica no botão "Play".
     {
-        LoadingScreenManager.Instance.SwitchToScene(1);
-        MusicManager.Instance.PlayMusic("Game");                                // Toca a música do jogo após iniciar a cena.
+        LoadingScreenManager.Instance.SwitchToScene(1);                         // Inicia a troca de cena para a cena de índice 1, utilizando a tela de carregamento.
+        MusicManager.Instance.PlayMusic("LoadingScreen");                   // Toca a música do jogo após iniciar a cena.
     }
 
     public void Quit()                                                          // Método chamado quando o jogador clica no botão "Quit".

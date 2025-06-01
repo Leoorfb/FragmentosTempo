@@ -49,7 +49,55 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96ea52a5732885049be84a8dea577789, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  soundEffects: []
+  soundEffects:
+  - groupID: TriceWalk
+    clips:
+    - {fileID: 8300000, guid: 7f0ccb064057a204089e0a2551ef3674, type: 3}
+  - groupID: TriceRun
+    clips:
+    - {fileID: 8300000, guid: eabd0139e1d67aa41854126e88289ada, type: 3}
+  - groupID: TricePrepare
+    clips:
+    - {fileID: 8300000, guid: 917704a42b20a234bb514c743d8059f9, type: 3}
+  - groupID: TriceCharge
+    clips:
+    - {fileID: 8300000, guid: f8b38725cfff8494a9c90a223933ba9e, type: 3}
+  - groupID: TriceStuck
+    clips:
+    - {fileID: 8300000, guid: 44e3dc1da56dd8a4fa46b52d0b253e00, type: 3}
+  - groupID: TriceTail
+    clips:
+    - {fileID: 8300000, guid: 6af1e708c39cfd54cb051bff51293ce6, type: 3}
+  - groupID: TriceEarthquake
+    clips:
+    - {fileID: 8300000, guid: 9e0541a664fd0d140b7b2cfc271ee9c9, type: 3}
+  - groupID: TreeFalling
+    clips:
+    - {fileID: 8300000, guid: ca19f0601b7178949932204c2f998b88, type: 3}
+  - groupID: CollectPotion
+    clips:
+    - {fileID: 8300000, guid: 700d95f181b41e04bb2a1fa271670ab3, type: 3}
+  - groupID: DrinkPotion
+    clips:
+    - {fileID: 8300000, guid: 06cedb09788182b429e235de0f204a37, type: 3}
+  - groupID: PlayerWalk
+    clips:
+    - {fileID: 8300000, guid: 7367da641125bfa46955b3971518042e, type: 3}
+  - groupID: PlayerDash
+    clips:
+    - {fileID: 8300000, guid: e32a9cc71f5f5db4badae346fb347dfd, type: 3}
+  - groupID: PlayerAtk
+    clips:
+    - {fileID: 0}
+  - groupID: PlayerSecondAtk
+    clips:
+    - {fileID: 0}
+  - groupID: PlayerUltimate
+    clips:
+    - {fileID: 0}
+  - groupID: MenuButtons
+    clips:
+    - {fileID: 0}
 --- !u!114 &7888205435358833563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,8 +127,12 @@ MonoBehaviour:
   tracks:
   - trackName: Main Menu
     clip: {fileID: 8300000, guid: 7a425a894cd345a4a9192fc49ced4b81, type: 3}
-  - trackName: Game
-    clip: {fileID: 8300000, guid: c1813d014e9955943aaf829a7f183377, type: 3}
+  - trackName: BossTrice
+    clip: {fileID: 8300000, guid: ce2705ffb6796dd4cadd806ca50d6256, type: 3}
+  - trackName: BossFornalha
+    clip: {fileID: 0}
+  - trackName: LoadingScreen
+    clip: {fileID: 8300000, guid: 776bfa53eb55690458e767e4a92433da, type: 3}
 --- !u!114 &5051182286534430317
 MonoBehaviour:
   m_ObjectHideFlags: 0

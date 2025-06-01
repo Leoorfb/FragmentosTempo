@@ -16,7 +16,7 @@ public class TriceratopsDamageDealer : MonoBehaviour
         if (playerHealth != null)                                                   // Se o componente PlayerHealth for encontrado:
         {
             playerHealth.TakeDamage(chargeDamage);                                  // Aplica o dano de investida ao jogador.
-            Debug.Log("Jogador tomou " + chargeDamage + " de dano de investida!");  // Exibe uma mensagem de log com a quantidade de dano.
+            Debug.Log("Jogador tomou " + chargeDamage + " de dano de investida!");
         }
     }
 

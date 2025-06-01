@@ -44,7 +44,7 @@ public class DialogManager : MonoBehaviour
 
     private void ShowDialog()                                       // Método para exibir a caixa de diálogo.
     {
-        isInTutorial = true;
+        isInTutorial = true;                                        // Ativa o tutorial.
 
         foreach (IBoss boss in bosses)                              // Desabilita o movimento de todos os bosses durante o tutorial.
         {

@@ -351,6 +351,7 @@ MonoBehaviour:
     m_Bits: 64
   dialogBox: {fileID: 0}
   aimCamera: {fileID: 0}
+  aimIndicator: {fileID: 0}
   aimingTargetPoint: {x: 0, y: 0, z: 0}
 --- !u!114 &227564338538363808
 MonoBehaviour:

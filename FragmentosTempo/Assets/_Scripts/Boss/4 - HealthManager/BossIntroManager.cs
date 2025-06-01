@@ -13,7 +13,7 @@ public class BossIntroManager : MonoBehaviour
         StartCoroutine(WaitForDialogToEnd());                   // Inicia uma coroutine que aguarda o fim do diálogo antes de ativar a barra de vida do Boss.
     }
 
-    private IEnumerator WaitForDialogToEnd()                    // Coroutine que espera até o fim do diálogo para ativar a barra de vida do Boss.
+    private IEnumerator WaitForDialogToEnd()                        // Coroutine que espera até o fim do diálogo para ativar a barra de vida do Boss.
     {
         yield return new WaitUntil(() => !dialogBox.activeSelf);    // Espera até que a caixa de diálogo esteja desativada.
 

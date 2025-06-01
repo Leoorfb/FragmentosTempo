@@ -8,6 +8,7 @@ TagManager:
   - Ground
   - Trice
   - TriceHead
+  - Path
   layers:
   - Default
   - TransparentFX
@@ -20,7 +21,7 @@ TagManager:
   - Player
   - Triceratops
   - FallenTree
-  - 
+  - Aim
   - 
   - 
   - 

@@ -28,13 +28,16 @@ public class PlayerAttack : MonoBehaviour
     private IEnumerator DoubleShotRoutine()                         // Corrotina para disparo duplo.
     {
         FireLaser(laserPrefab, leftHandTransform);                  // Chama o método para disparar o ataque básico na posição da mão esquerda.
+        SoundManager.Instance.PlaySound3D("PlayerAtk", transform.position);     // Toca o som de ataque.
         yield return new WaitForSeconds(delayShots);                // Tempo de atraso para disparar o segundo ataque em sequência.
         FireLaser(laserPrefab, leftHandTransform);                  // Dispara um segundo ataque.
+        SoundManager.Instance.PlaySound3D("PlayerAtk", transform.position);     // Toca o som de ataque.
     }
 
     public void FireSecondAttack()                                  // Método para usar o ataque secundário.
     {
         FireLaser(secondaryAtkPrefab, rightHandTransform);          // Chama o método para disparar um projétil na mão direita.
+        SoundManager.Instance.PlaySound3D("PlayerSecondAtk", transform.position);     // Toca o som de ataque secundário.
     }
 
     public void FireUltimate()                                      // Método para disparar a ultimate.
@@ -46,6 +49,7 @@ public class PlayerAttack : MonoBehaviour
     {
         yield return new WaitForSeconds(delayUltimate);             // Atraso da saída da ultimate.
         FireLaser(ultimatePrefab, ultHandTransform);                // Chama o método para disparar a ultimate na posição a frente do jogador.
+        SoundManager.Instance.PlaySound3D("PlayerUltimate", transform.position);     // Toca o som de ultimate.
     }
 
     private void FireLaser(GameObject prefab, Transform handTransform)              // Método para calcular o disparo dos ataques.

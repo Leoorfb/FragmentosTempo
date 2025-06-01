@@ -6,8 +6,8 @@ public class PlayerAim : MonoBehaviour
 {
     [SerializeField] private LayerMask groundLayerMask;                     // Máscara de camada para detectar colisões com o solo.
     [SerializeField] private GameObject dialogBox;                          // Referência à caixa de diálogo, usada para travar a rotação durante o diálogo.
-
-    [SerializeField] private Camera aimCamera;                                              // Referência à câmera principal, usada para calcular a posição do mouse no mundo.
+    [SerializeField] private Camera aimCamera;                              // Referência à câmera principal, usada para calcular a posição do mouse no mundo.
+    [SerializeField] private Transform aimIndicator;                        // Refrência ao objeto visual da mira.
 
     public Vector3 aimingTargetPoint;                                       // Ponto de destino para onde o jogador está mirando.
 
@@ -43,6 +43,13 @@ public class PlayerAim : MonoBehaviour
             Vector3 direction = aimingTargetPoint - transform.position;     // Calcula a direção do jogador para o ponto de mira, mantendo a rotação apenas no eixo horizontal (y = 0).
             direction.y = 0;                                                // Ignora a altura para garantir que a rotação seja apenas horizontal.
             transform.forward = direction;                                  // Atualiza a direção do jogador para olhar para o ponto de mira.
+
+            if (aimIndicator != null)                                       // Mover a mira para o ponto de mira.
+            {
+                Vector3 aimPosition = aimingTargetPoint;
+                aimPosition.y += 0.1f;
+                aimIndicator.position = aimPosition;
+            }
         }
     }
 }
