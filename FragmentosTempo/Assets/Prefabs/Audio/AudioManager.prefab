@@ -88,13 +88,13 @@ MonoBehaviour:
     - {fileID: 8300000, guid: e32a9cc71f5f5db4badae346fb347dfd, type: 3}
   - groupID: PlayerAtk
     clips:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: ba39bf8baf6d13046889b2d64822381a, type: 3}
   - groupID: PlayerSecondAtk
     clips:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: 1eb7cbaf61d23a64bbd36c0a38b5cb0c, type: 3}
   - groupID: PlayerUltimate
     clips:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
   - groupID: MenuButtons
     clips:
     - {fileID: 0}

@@ -385,14 +385,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: abdde7600eb1dda439185ca155f14eb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  laserPrefab: {fileID: 8252552610341244969, guid: 2426309e385198f41840d10af81c2c83,
+  laserPrefab: {fileID: 3473529909581181512, guid: bc142210df3ec4545a4e3e1f21e00da7,
     type: 3}
   leftHandTransform: {fileID: 1986941137590093164}
   delayShots: 0.1
-  secondaryAtkPrefab: {fileID: 3163330373457254488, guid: a843de076b403df48bf0de186b2cef89,
+  secondaryAtkPrefab: {fileID: 8400424712307853490, guid: 366377810aaf4fc4ab2be725a54c5712,
     type: 3}
   rightHandTransform: {fileID: 314246995247339640}
-  ultimatePrefab: {fileID: 5003188530645726675, guid: 47ff3f641fd2efb40bad097fa2c3cf53,
+  ultimatePrefab: {fileID: 1590415177872986601, guid: acdb90624a404aa438447006f1026065,
     type: 3}
   ultHandTransform: {fileID: 3291272968281252857}
   delayUltimate: 1.5

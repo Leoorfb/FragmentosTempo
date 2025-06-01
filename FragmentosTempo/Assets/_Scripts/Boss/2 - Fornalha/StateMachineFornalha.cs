@@ -314,7 +314,7 @@ public class BossStateMachine : MonoBehaviour
                 Collider col = trigger.GetComponent<Collider>();
                 if (col != null)
                 {
-                StartCoroutine(EnableTriggerTemporarily(col, 3f)); // só ativa por 0.2s
+                StartCoroutine(EnableTriggerTemporarily(col, 0.3f)); // só ativa por 0.2s
                 }
             }
 
