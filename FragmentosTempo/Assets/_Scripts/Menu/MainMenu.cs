@@ -20,6 +20,7 @@ public class MainMenu : MonoBehaviour
 
     public void Play()                                                          // Método chamado quando o jogador clica no botão "Play".
     {
+        SoundManager.Instance.PlaySound2D("Play");                              // Som do botão.
         LoadingScreenManager.Instance.SwitchToScene(1);                         // Inicia a troca de cena para a cena de índice 1, utilizando a tela de carregamento.        
     }
 
@@ -41,6 +42,8 @@ public class MainMenu : MonoBehaviour
 
     public void SaveVolume()                                                    // Método para salvar os volumes atuais de música e efeitos sonoros.
     {
+        SoundManager.Instance.PlaySound2D("Back");                              // Som do botão.
+
         audioMixer.GetFloat("MusicVolume", out float musicVolume);              // Obtém o volume atual da música.
         PlayerPrefs.SetFloat("MusicVolume", musicVolume);                       // Salva o volume da música usando PlayerPrefs.
 

@@ -107,6 +107,8 @@ public class DialogManager : MonoBehaviour
         {
             dialogBox.SetActive(false);                             // Oculta a caixa após o fim do diálogo.
 
+            Cursor.visible = false;                                 // Desabilita o mouse.
+
             foreach (IBoss boss in bosses)
             {
                 boss.SetCanMove(true);                              // Reabilita o movimento dos bosses após o tutorial.
