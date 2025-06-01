@@ -63,6 +63,19 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
     public float earthquakeDuration = 1.5f;             // Duração do efeito do terremoto.
     public LayerMask playerMask;                        // Layer que detecta o jogador para o terremoto.
 
+    [Header("VFX Settings")]
+    [SerializeField] private GameObject prepareVFX;
+    [SerializeField] private Transform vfxSpawnPrepare;
+    [SerializeField] private GameObject chargeVFX;
+    [SerializeField] private Transform vfxSpawnCharge;
+    [SerializeField] private GameObject tailVFX;
+    [SerializeField] private Transform vfxSpawnTail;
+    [SerializeField] private GameObject earthquakeVFX;
+    [SerializeField] private Transform vfxSpawnEarthquake;
+    [SerializeField] private GameObject stuckVFX;
+    [SerializeField] private Transform vfxSpawnStuck;
+
+
     [Header("References")]
     public Transform tailPosition;                      // Posição da cauda para detectar colisões traseiras.
     public Transform headPosition;                      // Posição da cabeça para detectar colisões frontais.
@@ -85,6 +98,7 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
     private bool isCharging = false;                    // Vertifica se está em investida.
     private bool isPreparingCharge = false;             // Vertifica se está se preparando para investir.
     private bool hasChargedDamage = false;              // Verifica se o dano já foi aplicado.
+    private GameObject chargeVFXInstance;
 
     private bool isTailAttacking = false;               // Vertifica se está usando o ataque de cauda.
     private float nextTailAttackTime = 0f;              // Próximo tempo que poderá usar golpe de cauda.
@@ -280,11 +294,23 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
 
         Debug.Log("Preparando investida...");
 
+        if (prepareVFX != null)
+        {
+            GameObject vfxInstance = Instantiate(prepareVFX, vfxSpawnPrepare != null ? vfxSpawnPrepare.position : transform.position, Quaternion.identity);
+            Destroy(vfxInstance, 5f);
+        }
+
         Invoke(nameof(Charge), chargePrepareTime);                              // Agenda a chamada do método Charge após um tempo de preparação.
     }
 
     public void Charge()                                // Método para realizar a investida.
     {
+        if (chargeVFX != null)
+        {
+            chargeVFXInstance = Instantiate(chargeVFX, vfxSpawnCharge != null ? vfxSpawnCharge.position : transform.position, Quaternion.identity);
+            chargeVFXInstance.transform.SetParent(transform);       // Faz o VFX seguir o Triceratops
+        }
+
         Debug.Log("Inciando investida!");
         isPreparingCharge = false;                                  // Desativa a preparação de investida.
         isCharging = true;                                          // Ativa a investida.
@@ -303,6 +329,12 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
         SetCanMove(true);                                   // Reativa os movimentos do Triceratops.
 
         nextChargeTime = Time.time + chargeCooldown;        // Define o cooldown para a próxima investida.
+
+        if (chargeVFXInstance != null)
+        {
+            Destroy(chargeVFXInstance);
+            chargeVFXInstance = null;
+        }
     }
 
     public void TailAttack()                            // Método para iniciar o golpe da cauda.
@@ -317,6 +349,12 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
         rb.velocity = Vector3.zero;                                        // Para o movimento do Triceratops.
 
         stateMachine.ChangeState(TriceratopsState.TailAttack);             // Entra no State Machine de Golpe de Cauda.
+
+        if (tailVFX != null)
+        {
+            GameObject vfxInstance = Instantiate(tailVFX, vfxSpawnTail != null ? vfxSpawnTail.position : transform.position, Quaternion.identity);
+            Destroy(vfxInstance , 5f);
+        }
 
         Collider[] hitColliders = Physics.OverlapSphere(tailPosition.position, tailAttackRange, playerMask);       // Detecta o jogador atrás e dentro da área de ataque da cauda.
         foreach (var hit in hitColliders)
@@ -401,12 +439,15 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
                 }
             }
         }
+
         isEarthquaking = false;                                        // Marca que o terremoto acabou.
 
         stateMachine.ChangeState(TriceratopsState.Idle);               // Entra no State Machine de Idle.
         isOnGround = true;                                             // Marca que está no chão.
 
         SetCanMove(true);                                              // Reativa os movimentos.
+
+        PlayVFX(earthquakeVFX, vfxSpawnEarthquake.position, vfxSpawnEarthquake.rotation, 3f);
     }
 
     public void GetStuck()                              // Método para aprisonar o Triceratops.
@@ -462,6 +503,15 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
         if (isCharging && collision.gameObject.CompareTag("Tree"))     // Se está investindo e acertou uma árvore.
         {
             GetStuck();                                                // Chama o método de aprisionar.
+
+            if (stuckVFX != null)
+            {
+                GameObject vfxInstance = Instantiate(stuckVFX, vfxSpawnStuck != null ? vfxSpawnStuck.position : transform.position, Quaternion.identity);
+                vfxInstance.transform.SetParent(transform);
+                Debug.Log("Stuck VFX");
+            }
+
+            return;
         }
 
         if (collision.gameObject.CompareTag("Player"))          // Se colidiu com o jogador.
@@ -493,6 +543,26 @@ public class TriceratopsBoss : MonoBehaviour, IBoss
         if (!rb.isKinematic)                            // Se o Rigidbody NÃO estiver no modo kinematic.
         {
             rb.velocity = Vector3.zero;                 // Zera a velocidade atual para evitar deslizamentos indesejados.
+        }
+    }
+
+    private void PlayVFX(GameObject vfxObject, Vector3 position, Quaternion rotation, float duration)
+    {
+        if (vfxObject == null) return;
+
+        vfxObject.transform.position = position;
+        vfxObject.transform.rotation = rotation;
+        vfxObject.SetActive(true);
+
+        StartCoroutine(DisableVFXAfterTime(vfxObject, duration));
+    }
+
+    private IEnumerator DisableVFXAfterTime(GameObject vfxObject, float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        if (vfxObject != null)
+        {
+            vfxObject.SetActive(false);
         }
     }
 

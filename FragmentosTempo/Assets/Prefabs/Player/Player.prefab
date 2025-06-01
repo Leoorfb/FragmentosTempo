@@ -371,6 +371,7 @@ MonoBehaviour:
   potionCountText: {fileID: 0}
   potionCount: 3
   potionHealAmount: 30
+  vfxHeal: {fileID: 339158821923109191, guid: 108ca465382c11742bd2c91fe4fdb13f, type: 3}
   isInvunerable: 0
 --- !u!114 &8477867027517376017
 MonoBehaviour:

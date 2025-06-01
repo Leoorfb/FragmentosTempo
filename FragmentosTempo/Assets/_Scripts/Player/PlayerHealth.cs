@@ -17,6 +17,9 @@ public class PlayerHealth : MonoBehaviour
     [SerializeField] private int potionHealAmount = 30;         // Quantidade de vida recuperada com a poção.
     private Color originalPotionTextColor;                      // Armazena a cor original do texto.
 
+    [Header("VFX Settings")]
+    [SerializeField] private GameObject vfxHeal;
+
     public bool isInvunerable = false;                          // Flag para verificar se o jogador está imune a dano.
 
     public int PotionCount => potionCount;                      // Retornar a quantidade atual de poções disponíveis.
@@ -66,6 +69,12 @@ public class PlayerHealth : MonoBehaviour
             potionCount--;                                              // Reduz o número de poções disponíveis.
             UpdateHealthUI();                                           // Atualiza a barra de vida na interface.
             Debug.Log("Poção usada!");
+
+            if (vfxHeal != null)
+            {
+                Instantiate(vfxHeal, transform.position, Quaternion.identity);
+            }
+
             UpdatePotionUI();                                           // Atualiza o texto com a quantidade de poções.
             return true;                                                // Retorna true indicando que a poção foi usada.
         }

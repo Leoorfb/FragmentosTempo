@@ -527,6 +527,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: AudioManager
       objectReference: {fileID: 0}
+    - target: {fileID: 7619685856613282707, guid: 799d4e00a9df5eb48b7b6f5e77921054,
+        type: 3}
+      propertyPath: tracks.Array.data[2].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: e7a0945b8745fd5428e10d93fe201c7d, type: 3}
     - target: {fileID: 8584320656457090517, guid: 799d4e00a9df5eb48b7b6f5e77921054,
         type: 3}
       propertyPath: m_LocalPosition.x

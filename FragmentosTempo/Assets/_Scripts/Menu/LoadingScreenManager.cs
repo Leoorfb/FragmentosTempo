@@ -35,6 +35,8 @@ public class LoadingScreenManager : MonoBehaviour
 
     public void SwitchToScene(int id)                                           // Método público para iniciar a troca de cena.
     {
+        MusicManager.Instance.PlayMusic("LoadingScreen");                       // Toca a música do jogo após iniciar a cena.
+
         m_LoadingScreenObject.SetActive(true);                                  // Ativa a tela de carregamento.
         progressBar.value = 0;                                                  // Zera a barra de progresso.
         StartCoroutine(SwitchToSceneAsync(id));                                 // Inicia a coroutine de troca assíncrona.
@@ -73,6 +75,11 @@ public class LoadingScreenManager : MonoBehaviour
         if (scene.name == "BossTrice")                                          // Se a cena carregada for a "BossTrice".
         {
             MusicManager.Instance.PlayMusic("BossTrice", 1f);                   // Inicia a troca de música com fade.
+        }
+
+        if (scene.name == "BossFornalha")                                       // Se a cena carregada for a "BossFornalha".
+        {
+            MusicManager.Instance.PlayMusic("BossFornalha", 1f);
         }
     }
 }

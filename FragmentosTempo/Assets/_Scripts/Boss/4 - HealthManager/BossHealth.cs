@@ -82,7 +82,7 @@ public class BossHealth : MonoBehaviour
         Debug.Log("Boss morreu!");
         BossHealthManager.Instance.DestroyBar();
 
-        LoadingScreenManager.Instance.SwitchToScene(2);
+        LoadingScreenManager.Instance.SwitchToScene(nextSceneID);
 
         Destroy(gameObject);
     }

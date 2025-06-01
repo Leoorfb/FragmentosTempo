@@ -10,6 +10,8 @@ TagManager:
   - TriceHead
   - Path
   - Fornalha
+  - FxTemporaire
+  - FootTrice
   layers:
   - Default
   - TransparentFX
