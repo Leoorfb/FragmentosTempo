@@ -239,6 +239,7 @@ MonoBehaviour:
   player: {fileID: 0}
   bossScripts:
   - {fileID: 0}
+  bossHealth: {fileID: 0}
   isInTutorial: 0
 --- !u!1 &5364372375727288354
 GameObject:

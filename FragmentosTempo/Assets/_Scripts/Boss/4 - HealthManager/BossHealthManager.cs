@@ -32,7 +32,7 @@ public class BossHealthManager : MonoBehaviour
         }
 
         currentBossBarInstance = Instantiate(bossHealthBarPrefab);              // Instancia a barra de vida na cena.
-        currentBossBarInstance.SetActive(false);                                // Deixa a barra inicialmente desativada, para ativar no momento certo.
+        currentBossBarInstance.SetActive(true);                                 // Deixa a barra inicialmente desativada, para ativar no momento certo.
 
         var barUI = currentBossBarInstance.GetComponent<BossHealthBarUI>();     // Obtém o script responsável pela UI da barra.
         OnBarSpawned?.Invoke(barUI);                                            // Dispara o evento.

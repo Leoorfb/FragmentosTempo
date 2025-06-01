@@ -11,6 +11,10 @@ public class BossHealth : MonoBehaviour
     private BossHealthBarUI healthBarUI;                                // Referência para o script que controla a UI da barra de vida.
     private string bossName;                                            // Nome do Boss atual.
 
+    public BossHealthBarUI HealthBarUI => healthBarUI;
+
+    public int nextSceneID;                                             // ID da próxima cena a ser carregada após a morte.
+
     private readonly Dictionary<string, string> bossNameByScene = new Dictionary<string, string>()      // Dicionário que associa cenas aos nomes dos bosses.
     {
         { "BossTrice", "Triceratops" },
@@ -21,9 +25,17 @@ public class BossHealth : MonoBehaviour
     {
         currentHealth = maxHealth;                                      // Define a vida atual como a vida máxima.
         BossHealthManager.Instance.OnBarSpawned += InitHealthBar;       // Registra o método InitHealthBar no evento OnBarSpawned para inicializar a UI assim que ela for criada.
+
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if (sceneName != "BossTrice")
+        {
+            BossHealthManager.Instance.SpawnBar();                          // Intância a barra de vida.
+            BossHealthManager.Instance.ShowBar(0.5f);                       // Mostra a barra de vida.
+        }
     }
 
-    private void InitHealthBar(BossHealthBarUI barUI)                   // Método para inicializar a barra de vida com base na cena atual e associa ao nome do boss.
+    public void InitHealthBar(BossHealthBarUI barUI)                   // Método para inicializar a barra de vida com base na cena atual e associa ao nome do boss.
     {
         healthBarUI = barUI;
 
@@ -69,6 +81,9 @@ public class BossHealth : MonoBehaviour
     {
         Debug.Log("Boss morreu!");
         BossHealthManager.Instance.DestroyBar();
+
+        LoadingScreenManager.Instance.SwitchToScene(2);
+
         Destroy(gameObject);
     }
 }

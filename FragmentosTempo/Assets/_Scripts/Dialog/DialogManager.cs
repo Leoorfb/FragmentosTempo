@@ -18,6 +18,8 @@ public class DialogManager : MonoBehaviour
     [SerializeField] private PlayerMovement player;                 // Referência do jogador.
     [SerializeField] private List<MonoBehaviour> bossScripts = new();             // Lista de scripts do boss para controlar os bosses durante o tutorial.
 
+    [SerializeField] private BossHealth bossHealth;                 // Referência ao BossHealth.
+
     private List<IBoss> bosses = new();                             // Lista de bosses que implementam a interface IBoss.
     public bool isInTutorial = false;                               // Verificar se está no tutorial.
 
@@ -26,6 +28,7 @@ public class DialogManager : MonoBehaviour
     private Coroutine typingCoroutine;                              // Referência para a corrotina que controla a digitação do texto.
 
     public bool IsDialogActive => dialogBox.activeSelf;             // Propriedade pública que retorna true se a caixa de diálogo estiver ativa na cena.
+
 
     // Start is called before the first frame update
     void Start()
@@ -116,6 +119,13 @@ public class DialogManager : MonoBehaviour
             }
 
             isInTutorial = false;                                   // Marca que o tutorial terminou.
+
+            if (bossHealth != null)
+            {
+                BossHealthManager.Instance.SpawnBar();
+                BossHealthManager.Instance.ShowBar(0.5f);
+                Debug.Log("Barra de vida criada.");
+            }
         }
     }
 }

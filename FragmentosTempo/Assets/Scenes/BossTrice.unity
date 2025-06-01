@@ -566,16 +566,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2686343496408135124, guid: 08b1c4e404936ed4a949a626a6b581a0,
-        type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4863288595775573164, guid: 08b1c4e404936ed4a949a626a6b581a0,
-        type: 3}
-      propertyPath: m_BlockingMask.m_Bits
-      value: 4294967295
-      objectReference: {fileID: 0}
     - target: {fileID: 6420509094410361427, guid: 08b1c4e404936ed4a949a626a6b581a0,
         type: 3}
       propertyPath: m_Pivot.x
@@ -680,11 +670,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Canvas
-      objectReference: {fileID: 0}
-    - target: {fileID: 7769551242070193196, guid: 08b1c4e404936ed4a949a626a6b581a0,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1157,6 +1142,18 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: dc7807624e9cacd48ba40c0c8925f5bf, type: 3}
+--- !u!114 &2604685993342402879 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2754347402217972175, guid: dc7807624e9cacd48ba40c0c8925f5bf,
+    type: 3}
+  m_PrefabInstance: {fileID: 2604685993342402878}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8e5167dda8e2dc040b0553f0ca1d7614, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &3896731824609072138
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1400,16 +1397,16 @@ PrefabInstance:
       propertyPath: m_Name
       value: DialogBox
       objectReference: {fileID: 0}
-    - target: {fileID: 5738549157591255125, guid: 6d1c68d20d72df7419a09b87dcd9c3ca,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 8880656129574168793, guid: 6d1c68d20d72df7419a09b87dcd9c3ca,
         type: 3}
       propertyPath: player
       value: 
       objectReference: {fileID: 3896731824609072139}
+    - target: {fileID: 8880656129574168793, guid: 6d1c68d20d72df7419a09b87dcd9c3ca,
+        type: 3}
+      propertyPath: bossHealth
+      value: 
+      objectReference: {fileID: 2604685993342402879}
     - target: {fileID: 8880656129574168793, guid: 6d1c68d20d72df7419a09b87dcd9c3ca,
         type: 3}
       propertyPath: bossScripts.Array.data[0]
