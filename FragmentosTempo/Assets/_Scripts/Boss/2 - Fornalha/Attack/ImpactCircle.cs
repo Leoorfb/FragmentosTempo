@@ -14,10 +14,18 @@ public class ImpactCircle : MonoBehaviour
     private HashSet<PlayerHealth> playersInZone = new HashSet<PlayerHealth>();
     private float timeElapsed = 0f;
 
+
+    [Header("Audio")]
+    public AudioClip spawnSound; public AudioSource audioSource;
+
     void Start()
     {
         GenerateMesh();
+        // Toca som ao aparecer
+        if (spawnSound && audioSource)
+            audioSource.PlayOneShot(spawnSound);
         StartCoroutine(DamageRoutine());
+
 
     }
 

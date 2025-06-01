@@ -8,6 +8,10 @@ public class Fireball : MonoBehaviour
     public int damageAmount = 25;
     private Rigidbody rb;
 
+    [Header("Audio")]
+    public AudioClip spawnSound; 
+    public AudioSource audioSource;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -16,6 +20,9 @@ public class Fireball : MonoBehaviour
         if (target != null)
         {
             LaunchProjectile();
+            // Toca som ao aparecer
+            if (spawnSound && audioSource)
+                audioSource.PlayOneShot(spawnSound);
         }
 
         Destroy(gameObject, 5f); // Destrói após 5 segundos

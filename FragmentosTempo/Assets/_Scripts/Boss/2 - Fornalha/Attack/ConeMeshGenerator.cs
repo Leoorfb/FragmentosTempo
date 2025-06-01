@@ -20,9 +20,15 @@ public class ConeMeshGenerator : MonoBehaviour
     private float timer = 0f;
     private List<Vector3> coneVertices = new List<Vector3>();
 
+    [Header("Audio")]
+    public AudioClip spawnSound; public AudioSource audioSource;
+
     void Start()
     {
         GenerateFlatCone();
+        // Toca som ao aparecer
+        if (spawnSound && audioSource)
+            audioSource.PlayOneShot(spawnSound);
         StartCoroutine(DamageOverTime());
     }
 

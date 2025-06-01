@@ -48,5 +48,17 @@ public class LaserProjectile : MonoBehaviour
             }
             Destroy(gameObject);                                                // Destroi o projétil após atingir o inimigo.
         }
+
+
+        if (other.CompareTag("Fornalha"))                                          // Verifica se colidiu com o inimigo específico (tag "Trice" representa o boss).
+        {
+
+            BossHealth bossHealth = other.GetComponent<BossHealth>();           // Tenta acessar o componente de vida do boss.
+            if (bossHealth != null)
+            {
+                bossHealth.ApplyDamage(damage);                                 // Aplica dano ao boss.
+            }
+            Destroy(gameObject);                                                // Destroi o projétil após atingir o inimigo.
+        }
     }
 }

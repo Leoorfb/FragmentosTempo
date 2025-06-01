@@ -9,6 +9,7 @@ TagManager:
   - Trice
   - TriceHead
   - Path
+  - Fornalha
   layers:
   - Default
   - TransparentFX
