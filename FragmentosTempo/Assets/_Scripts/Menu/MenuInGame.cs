@@ -28,7 +28,7 @@ public class MenuInGame : MonoBehaviour
     {
         Time.timeScale = 0f;
         isPaused = true;
-
+        Cursor.visible = true;
         menuInGame.SetActive(true);
     }
 
@@ -38,6 +38,7 @@ public class MenuInGame : MonoBehaviour
         {
             Time.timeScale = 1f;
             isPaused = false;
+            Cursor.visible = false;
         }
 
         menuInGame.SetActive(false);
