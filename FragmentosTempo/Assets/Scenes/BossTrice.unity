@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1090,6 +1090,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 227564338538363808, guid: dd211940fc24e814db81be883a815d22,
         type: 3}
+      propertyPath: healthBarImage
+      value: 
+      objectReference: {fileID: 6324170103999089391}
+    - target: {fileID: 227564338538363808, guid: dd211940fc24e814db81be883a815d22,
+        type: 3}
       propertyPath: potionCountText
       value: 
       objectReference: {fileID: 6324170103999089390}
@@ -1586,6 +1591,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6324170103999089391 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6676816542936616393, guid: e4557a20f2b76be46a2f938799aa94ae,
+    type: 3}
+  m_PrefabInstance: {fileID: 6324170103999089387}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7372276521703629708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1594,10 +1611,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 345950280535029970, guid: 61561aea9095f4c4cb4156eb969a3e34,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 780
+      objectReference: {fileID: 0}
+    - target: {fileID: 345950280535029970, guid: 61561aea9095f4c4cb4156eb969a3e34,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 437
+      objectReference: {fileID: 0}
+    - target: {fileID: 1073922278226947124, guid: 61561aea9095f4c4cb4156eb969a3e34,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7204776979048186987, guid: 61561aea9095f4c4cb4156eb969a3e34,
         type: 3}
       propertyPath: m_Name
       value: CanvasPauseGame
+      objectReference: {fileID: 0}
+    - target: {fileID: 7204776979048186987, guid: 61561aea9095f4c4cb4156eb969a3e34,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8102639459005088425, guid: 61561aea9095f4c4cb4156eb969a3e34,
         type: 3}
