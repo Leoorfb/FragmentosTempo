@@ -303,17 +303,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 8e9dfa8f21aa8134b8f499b2fea55e4c,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.98
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e9dfa8f21aa8134b8f499b2fea55e4c,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.88
+      value: 2.192173
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e9dfa8f21aa8134b8f499b2fea55e4c,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 36.26
+      value: 52.68138
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 8e9dfa8f21aa8134b8f499b2fea55e4c,
         type: 3}
@@ -2591,7 +2591,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5167dda8e2dc040b0553f0ca1d7614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 200
+  maxHealth: 100
   currentHealth: 0
   nextSceneID: 2
 --- !u!114 &641123088970276937
