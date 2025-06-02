@@ -2554,7 +2554,7 @@ MonoBehaviour:
     type: 3}
   coneAngle: 45
   coneRange: 5
-  pauseBetweenRotations: 1
+  pauseBetweenRotations: 1.5
   rotationSpeedDegreesPerSecond: 180
   jumpForce: 20
   airTime: 3
@@ -2567,11 +2567,6 @@ MonoBehaviour:
   groundMask:
     serializedVersion: 2
     m_Bits: 64
-  pushForce: 5
-  impactRadius: 2
-  impactDamage: 30
-  aoeDuration: 3
-  dps: 5
 --- !u!114 &2968395047311166157
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2662,7 +2657,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e5167dda8e2dc040b0553f0ca1d7614, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 100
+  maxHealth: 500
   currentHealth: 0
   nextSceneID: 0
 --- !u!82 &1485707987221457166

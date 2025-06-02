@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
+//State Machine que controla os golpes do boss fornalha, escolhendo o golpe randomicamente e não usando mesmo golpe mais que 2 vezes
 public class BossStateMachine : MonoBehaviour
 {
     public Rigidbody rb;
@@ -251,18 +252,9 @@ public class BossStateMachine : MonoBehaviour
     public GameObject impactHexPrefab;
     public LayerMask groundMask;
 
-    [Header("Impact Config")]
-    public float pushForce = 5f;
-    public float impactRadius = 5f;
-    public int impactDamage = 30;
-    public float aoeDuration = 3f;
-    public int dps = 5;
-
     private GameObject blobShadow;
-    private bool isJumping;
     IEnumerator JumpAttackRoutine()
     {
-            isJumping = true;
             rb.useGravity = true;
             rb.velocity = Vector3.up * jumpForce;
 
@@ -299,7 +291,7 @@ public class BossStateMachine : MonoBehaviour
             transform.position = landPos;
             rb.velocity = Vector3.zero;
             rb.useGravity = true;
-            GetComponent<Collider>().enabled = true;
+            
 
             // Espera cair no chão
             while (!Physics.Raycast(transform.position, Vector3.down, 1f, groundMask))
@@ -309,6 +301,7 @@ public class BossStateMachine : MonoBehaviour
             }
 
             LandingTrigger trigger = GetComponentInChildren<LandingTrigger>();
+            GetComponent<Collider>().enabled = true;
             if (trigger != null)
             {
                 Collider col = trigger.GetComponent<Collider>();
@@ -321,8 +314,6 @@ public class BossStateMachine : MonoBehaviour
             Destroy(blobShadow, 0.1f);
 
             GetComponent<Collider>().enabled = true;
-            isJumping = false;
-
             // Instancia o círculo de dano ao cair
             if (impactHexPrefab != null)
             {

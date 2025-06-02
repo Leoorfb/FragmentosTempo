@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+//Este Script cria um hexagono ao boss fornalha finalizar seu ataque de pulo ao cair no chão, dando dano contiuamente por DURATION segundos
+
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer), typeof(MeshCollider))]
 public class ImpactCircle : MonoBehaviour
 {

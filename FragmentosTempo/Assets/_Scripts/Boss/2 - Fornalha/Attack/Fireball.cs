@@ -1,6 +1,8 @@
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody))]
+
+//Este Script faz o Ataque fireball calculando velocidade e distacia até o player
 public class Fireball : MonoBehaviour
 {
     public Transform target;

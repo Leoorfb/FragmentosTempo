@@ -4984,7 +4984,7 @@ MonoBehaviour:
   coneAngle: 60
   coneRange: 9.6
   segments: 30
-  damage: 10
+  damage: 20
   duration: 3
   damageTickRate: 1
   targetLayers:

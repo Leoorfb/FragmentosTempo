@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 
 
+//Este Script cria a mesh dinamicamente para o Ataque de cone LavaPond da State MAchine da fornalha
+
 [RequireComponent(typeof(MeshFilter), typeof(MeshRenderer))]
 public class ConeMeshGenerator : MonoBehaviour
 {
