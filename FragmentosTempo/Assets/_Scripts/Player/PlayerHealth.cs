@@ -119,6 +119,7 @@ public class PlayerHealth : MonoBehaviour
 
     void Die()                                              // Método para lidar com a morte do jogador.
     {
+        SoundManager.Instance.StopLoop3D();
         EndGameUI.instance?.GameOverScreen();
         Destroy(gameObject);
         Debug.Log("Jogador morreu!");

@@ -24,16 +24,22 @@ public class EndGameUI : MonoBehaviour
 
     public void OnTryAgainButtonClick()
     {
+        Time.timeScale = 1f;
+        Cursor.visible = false;
         LoadingScreenManager.Instance.SwitchToScene(1);
     }
 
     public void OnMainMenuButtonClick()
     {
+        Time.timeScale = 1f;
         LoadingScreenManager.Instance.SwitchToScene(0);
     }
 
     public void GameOverScreen()
     {
+        Time.timeScale = 0f;
+        Cursor.visible = true;
+
         endGameScreen.SetActive(true);
         gameoverText.SetActive(true);
         winText.SetActive(false);
@@ -42,6 +48,9 @@ public class EndGameUI : MonoBehaviour
 
     public void WinScreen()
     {
+        Time.timeScale = 0f;
+        Cursor.visible = true;
+
         endGameScreen.SetActive(true);
         gameoverText.SetActive(false);
         winText.SetActive(true);
