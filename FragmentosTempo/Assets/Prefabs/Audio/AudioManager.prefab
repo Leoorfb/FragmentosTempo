@@ -95,9 +95,12 @@ MonoBehaviour:
   - groupID: PlayerUltimate
     clips:
     - {fileID: 8300000, guid: 1d74880bed4586644a16a79a2d9dc8af, type: 3}
-  - groupID: MenuButtons
+  - groupID: Play
     clips:
-    - {fileID: 0}
+    - {fileID: 8300000, guid: b2287c5cadcda454381ea0c4d027ab18, type: 3}
+  - groupID: Back
+    clips:
+    - {fileID: 8300000, guid: b83ddc2c05a3b5e4f9a39a1564deb9d4, type: 3}
 --- !u!114 &7888205435358833563
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -126,13 +129,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tracks:
   - trackName: Main Menu
-    clip: {fileID: 8300000, guid: 7a425a894cd345a4a9192fc49ced4b81, type: 3}
+    clip: {fileID: 8300000, guid: 776bfa53eb55690458e767e4a92433da, type: 3}
   - trackName: BossTrice
     clip: {fileID: 8300000, guid: ce2705ffb6796dd4cadd806ca50d6256, type: 3}
   - trackName: BossFornalha
-    clip: {fileID: 0}
+    clip: {fileID: 8300000, guid: e5e17c696bd9b7d419db9d795d1e9c53, type: 3}
   - trackName: LoadingScreen
-    clip: {fileID: 8300000, guid: 776bfa53eb55690458e767e4a92433da, type: 3}
+    clip: {fileID: 8300000, guid: e7a0945b8745fd5428e10d93fe201c7d, type: 3}
 --- !u!114 &5051182286534430317
 MonoBehaviour:
   m_ObjectHideFlags: 0
