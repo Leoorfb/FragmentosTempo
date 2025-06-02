@@ -8,6 +8,7 @@ public class PlayerAim : MonoBehaviour
     [SerializeField] private GameObject dialogBox;                          // Referência à caixa de diálogo, usada para travar a rotação durante o diálogo.
     [SerializeField] private Camera aimCamera;                              // Referência à câmera principal, usada para calcular a posição do mouse no mundo.
     [SerializeField] private Transform aimIndicator;                        // Refrência ao objeto visual da mira.
+    [SerializeField] private GameObject menuInGame;                         // Referência ao menu.
 
     public Vector3 aimingTargetPoint;                                       // Ponto de destino para onde o jogador está mirando.
 
@@ -35,7 +36,7 @@ public class PlayerAim : MonoBehaviour
 
     private void Aim()                                                      // Método responsável pela rotação do jogador em direção ao ponto de mira.
     {
-        if (dialogBox != null && dialogBox.activeSelf) return;              // Se o diálogo estiver ativo, a rotação é bloqueada (não gira o jogador).
+        if ((dialogBox != null && dialogBox.activeSelf) || (menuInGame != null && menuInGame.activeSelf)) return;            // Se o diálogo ou menu estiver ativo, a rotação é bloqueada (não gira o jogador).
 
         var (success, aimingTargetPoint) = GetMousePosition();              // Obtém a posição do mouse no mundo, usando o método GetMousePosition.
         if (success)
