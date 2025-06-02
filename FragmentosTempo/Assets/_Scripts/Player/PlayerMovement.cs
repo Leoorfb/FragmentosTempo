@@ -33,6 +33,8 @@ public class PlayerMovement : MonoBehaviour
     [Header("Animation")]
     [SerializeField] private Animator animator;                             // Referência ao Animator do jogador.
 
+    [SerializeField] private Joystick joystick;                             // Referência ao joystick mobile.
+
     private bool isWalkingSoundPlaying = false;                             // Flag para verificar se está tocando som de andar.
 
     private bool isDashing = false;                                         // Flag para verificar se o jogador está usando Dash.
@@ -122,6 +124,13 @@ public class PlayerMovement : MonoBehaviour
 
         if (!isDashing)                                                     // Se não estiver dando Dash, atualiza a direção de movimento com base no input.
         {
+            Vector2 input = moveInput.ReadValue<Vector2>();
+
+            if (joystick != null && joystick.InputDirection != Vector2.zero)
+            {
+                input = joystick.InputDirection;
+            }
+
             moveDirection.x = moveInput.ReadValue<Vector2>().x;
             moveDirection.z = moveInput.ReadValue<Vector2>().y;
         }
